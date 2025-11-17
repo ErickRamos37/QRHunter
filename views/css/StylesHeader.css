@@ -1,0 +1,71 @@
+:root {
+    /* Basado en el verde oscuro de los botones "REGISTRAR" y "Actualizar Ranking" */
+    --color-principal: #1A5E2E; 
+    /* Basado en el verde claro del texto "EXPOCIENCIA" */
+    --color-secundario: #4CAF50; 
+    /* Fondo limpio como en las capturas */
+    --color-fondo-claro: #F5F5F5; 
+    /* Texto principal */
+    --color-texto: #333; 
+}
+
+body {
+    /* Estilo de fuente simple y limpio */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-fondo-claro);
+}
+
+header {
+    background-color: #FFFFFF; /* Fondo blanco para la barra del header */
+    color: var(--color-texto);
+    padding: 10px 40px; /* Relleno superior/inferior y a los lados */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil como en las interfaces limpias */
+    
+    /* Usamos Flexbox para alinear el título y la navegación */
+    display: flex;
+    justify-content: space-between; /* El título a la izquierda, la navegación a la derecha */
+    align-items: center;
+}
+
+header h1 {
+    /* Estilo del título principal o logo "QR Hunter" */
+    font-size: 1.8em;
+    color: var(--color-principal); /* Le damos el color verde oscuro principal */
+    margin: 0; /* Quitamos el margen por defecto */
+}
+
+nav ul {
+    list-style: none; /* Quitamos las viñetas de la lista */
+    padding: 0;
+    margin: 0;
+    display: flex; /* Hacemos que los elementos de la lista se alineen horizontalmente */
+    gap: 20px; /* Espacio entre cada enlace */
+}
+
+/* Estilos de los enlaces */
+nav a {
+    text-decoration: none; /* Quitamos el subrayado por defecto */
+    color: var(--color-texto); 
+    font-weight: bold;
+    padding: 5px 10px;
+    transition: color 0.3s ease, background-color 0.3s ease; /* Transición suave para el hover */
+}
+
+/* Efecto al pasar el cursor (hover) */
+nav a:hover {
+    color: var(--color-secundario); /* Cambia el color del texto a un verde claro */
+    /* Opcional: puedes añadir un sutil fondo */
+    /* background-color: rgba(76, 175, 80, 0.1); */
+    border-radius: 4px;
+}
+
+/* Estilo especial para el último enlace (Cerrar Sesión) */
+nav ul li:last-child a {
+    color: #FF6666; /* Un color rojo suave para indicar acción de "salir" */
+}
+
+nav ul li:last-child a:hover {
+    color: #CC0000; /* Un rojo más fuerte al pasar el cursor */
+}
