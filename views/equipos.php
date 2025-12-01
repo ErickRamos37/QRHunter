@@ -10,8 +10,9 @@
 
 <body>
     <?php
-    require("../Config/conexion.php");
+    require("../config/conexion.php"); 
     require("header.php");
+    $conn = conectarBD();
     ?>
     <div class="container">
 
@@ -79,7 +80,7 @@
                         <td>
                             <a href=""><button>Finalizar Ronda</button></a>
                             <a href="../Formularios/formularioEditarEquipo.php?id_usuario=<?php echo $equipos["id_usuario"] ?>"><button>Editar</button></a>
-                            <a href="../GRUD/eliminarEquipo.php?id_usuario=<?php echo $equipos['id_usuario'] ?>"><button>Eliminar</button></a>
+                            <a href="../GRUD/eliminarEquipo.php?id_usuario=<?php echo $equipos['id_usuario'] ?>" onclick="return confirm('¿Estás seguro de eliminar este equipo?');"><button>Eliminar</button></a>
                         </td>
                     </tr>
                 <?php

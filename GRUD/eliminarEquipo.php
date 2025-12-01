@@ -1,5 +1,6 @@
 <?php
 include_once("../config/conexion.php");
+$conn = conectarBD();
 
 $id_usuario = $_GET["id_usuario"];
 

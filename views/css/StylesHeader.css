@@ -21,7 +21,7 @@ header {
     background-color: #FFFFFF; /* Fondo blanco para la barra del header */
     color: var(--color-texto);
     padding: 10px 40px; /* Relleno superior/inferior y a los lados */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil como en las interfaces limpias */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
     
     /* Usamos Flexbox para alinear el título y la navegación */
     display: flex;
@@ -36,12 +36,19 @@ header h1 {
     margin: 0; /* Quitamos el margen por defecto */
 }
 
-nav ul {
+/* Estilos para la lista de enlaces de navegación */
+nav ul.nav-links {
     list-style: none; /* Quitamos las viñetas de la lista */
     padding: 0;
     margin: 0;
     display: flex; /* Hacemos que los elementos de la lista se alineen horizontalmente */
+    align-items: center; /* Alineación vertical de los ítems de la lista */
     gap: 20px; /* Espacio entre cada enlace */
+}
+
+/* Estilos para los elementos de la lista (<li>) */
+nav ul.nav-links li {
+    display: block; /* Aseguramos que se comporten como bloques */
 }
 
 /* Estilos de los enlaces */
@@ -49,23 +56,72 @@ nav a {
     text-decoration: none; /* Quitamos el subrayado por defecto */
     color: var(--color-texto); 
     font-weight: bold;
-    padding: 5px 10px;
-    transition: color 0.3s ease, background-color 0.3s ease; /* Transición suave para el hover */
+    padding: 5px 0; /* Padding vertical, sin padding horizontal en los enlaces principales */
+    transition: color 0.3s ease; /* Transición suave para el hover */
 }
 
 /* Efecto al pasar el cursor (hover) */
 nav a:hover {
     color: var(--color-secundario); /* Cambia el color del texto a un verde claro */
-    /* Opcional: puedes añadir un sutil fondo */
-    /* background-color: rgba(76, 175, 80, 0.1); */
+}
+
+/* --- Estilos para el Dropdown (Menú Desplegable) --- */
+
+.dropdown {
+    position: relative;
+    display: inline-block; /* Para que el menú se coloque correctamente */
+    margin-left: 10px; /* Espacio adicional para separarlo de los enlaces */
+}
+
+/* Botón del Dropdown (Nombre del Administrador) */
+.dropbtn {
+    background-color: var(--color-principal); /* Color de fondo verde oscuro */
+    color: white; /* Texto blanco */
+    padding: 8px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px; /* Bordes redondeados */
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #2E8B57; /* Un verde un poco más claro al pasar el ratón */
+}
+
+/* Contenido del Dropdown */
+.dropdown-content {
+    display: none; /* Oculto por defecto */
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    right: 0; /* Alineamos el menú a la derecha del botón */
     border-radius: 4px;
+    overflow: hidden; /* Para que los bordes redondeados se apliquen a los enlaces */
 }
 
-/* Estilo especial para el último enlace (Cerrar Sesión) */
-nav ul li:last-child a {
-    color: #FF6666; /* Un color rojo suave para indicar acción de "salir" */
+/* Enlaces dentro del Dropdown */
+.dropdown-content a {
+    color: var(--color-texto);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-weight: normal; /* Menos énfasis que los enlaces principales */
 }
 
-nav ul li:last-child a:hover {
-    color: #CC0000; /* Un rojo más fuerte al pasar el cursor */
+/* Hover en los enlaces del Dropdown */
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+    color: var(--color-principal);
+}
+
+/* Mostrar el contenido del dropdown al pasar el ratón sobre el elemento padre (clase .dropdown) */
+.dropdown:hover .dropdown-content {
+    display: block;
 }

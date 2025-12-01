@@ -12,6 +12,7 @@
     <?php
     require("../Config/conexion.php");
     require("../views/header.php");
+    $conn = conectarBD();
     ?>
     <div class="container">
         <h2>Editar Producto</h2>
@@ -54,7 +55,7 @@
                 ?>
             </select>
 
-            <label for="dispositivo">Dispositivo (ID ESP32):</label>
+            <label for="dispositivo">Dispositivo:</label>
             <select id="dispositivo" name="dispositivo">
                 <option disabled selected>--Elige un Dispositivo--</option>
                 <?php
@@ -73,7 +74,7 @@
                 }
                 ?>
             </select>
-            <label for="dispositivoID">Clave Del Dispositivo:</label>
+            <label for="dispositivoID">ID Del ESP32:</label>
             <input type="text" id="DisID" name="DisID" required value="<?php echo $row['ClaveDisp']; ?>">
 
             <button type="submit">Guardar Equipo</button> 

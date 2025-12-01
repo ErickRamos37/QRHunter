@@ -103,3 +103,57 @@ th {
 .acciones button {
   margin: 0 5px;
 }
+
+input, select, textarea {
+    box-sizing: border-box;}
+
+.btn-edit {
+    background-color: #2e7d32; 
+    color: white;
+    padding: 6px 12px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-right: 5px;
+}
+
+.btn-delete {
+    background-color: #1b5e20; 
+    color: white;
+    padding: 6px 12px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.btn-edit:hover, .btn-delete:hover {
+    opacity: 0.8;
+}
+
+.login-container {
+    max-width: 400px !important;
+    margin-top: 100px !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login-title {
+    text-align: center;
+    color: #1b5e20;
+    margin-bottom: 20px;
+}
+
+.btn-login-margin {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.error-msg {
+    background-color: #ffcdd2;
+    color: #c62828;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+}

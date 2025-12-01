@@ -1,5 +1,7 @@
 <?php
 include("../config/conexion.php");
+$conn = conectarBD();
+
 $nombre = $_POST["nombreEquipo"];
 $escuela_id = $_POST["escuela"];
 $id_disp = $_POST["dispositivo"];
