@@ -61,7 +61,8 @@ input, textarea, select {
   width: 100%;
 }
 
-button {
+/* Clases de los botones*/
+.buttonNormal {
   background-color: #0e6021;
   color: white;
   padding: 10px;
@@ -69,6 +70,24 @@ button {
   border-radius: 8px;
   cursor: pointer;
 }
+.buttonEditar {
+  background-color: #11418e;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.buttonEliminar {
+  background-color: #e31f1f;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
 
 .boton-enlace {
   background-color: #0e6021 !important; /* Forzar el color de fondo */
