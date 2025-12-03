@@ -33,7 +33,7 @@ nav a:hover {
   text-decoration: underline;
 }
 
-/* ----- Contenido CRUD ----- */
+/*  Contenido CRUD  */
 .container {
   max-width: 800px;
   margin: 2rem auto;
@@ -86,6 +86,27 @@ input, textarea, select {
   border-radius: 8px;
   cursor: pointer;
 }
+.buttonAdvertencia {
+  background-color: #ff8000;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+/*Hovers de los botones*/
+.buttonNormal:hover {
+  background-color: #0b4c19;
+}
+.buttonEditar:hover {
+  background-color: #0a2c63;
+}
+.buttonEliminar:hover {
+  background-color: #8f0c0c;
+}
+.buttonAdvertencia:hover {
+  background-color: #e17604;
+}
 
 
 
@@ -97,9 +118,6 @@ input, textarea, select {
   
   text-decoration: none !important; 
   display: inline-block !important; 
-}
-button:hover {
-  background-color: #0b4c19;
 }
 
 table {
