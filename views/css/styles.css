@@ -94,6 +94,19 @@ input, textarea, select {
   border-radius: 8px;
   cursor: pointer;
 }
+#buttonCentral {
+  margin-top: 14px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width: 100%;
+}
+#buttonALaDerecha {
+  margin-left: auto;
+  margin-right: 5%;
+  display: block;
+}
+
 /*Hovers de los botones*/
 .buttonNormal:hover {
   background-color: #0b4c19;

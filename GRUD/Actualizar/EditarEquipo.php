@@ -1,33 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
 
+<?php
+    require_once("../../config/config.php");
+    require_once(RUTA_RAIZ."/config/conexion.php"); 
+    require_once(RUTA_RAIZ."/views/header.php");
+    $conn = conectarBD();
+?>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Hunter - Editar Equipo</title>
-    <link rel="stylesheet" href="../views/css/styles.css">
+    <link rel="stylesheet" href="<?php echo RUTA_CSS?>styles.css">
 </head>
 
 <body>
-    <?php
-    require("../Config/conexion.php");
-    require("../views/header.php");
-    $conn = conectarBD();
-    ?>
     <div class="container">
         <h2>Editar Producto</h2>
-        <form action="../GRUD/editarEquipo.php" method="POST">
+        <form action="<?php echo BASE_URL?>GRUD/Actualizar/actualizarEquipo.php" method="POST">
             <?php
             $sql =
-                "Select u.id_usuario, u.nombre as Nombre, es.id_escuela, es.nombre as Escuela, dis.id_dispositivo as Dispositivo, u.esp32id as ClaveDisp 
-                from usuarios u, escuelas es, dispositivos dis 
-                where u.id_usuario = ?";
+                "Select eq.id_equipo, eq.nombre as Nombre, es.id_escuela, es.nombre as Escuela, dis.id_dispositivo as Dispositivo, eq.esp32id as ClaveDisp 
+                from Equipos eq, escuelas es, dispositivos dis 
+                where eq.id_equipo = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$_REQUEST["id_usuario"]]);
+            $stmt->execute([$_REQUEST["id_equipo"]]);
             $row = $stmt->fetch()
             ?>
 
-            <input type="Hidden" name="idUser" required value="<?php echo htmlspecialchars($row['id_usuario']); ?>">
+            <input type="Hidden" name="idUser" required value="<?php echo htmlspecialchars($row['id_equipo']); ?>">
 
             <label for="nombreEquipo">Nombre del Equipo:</label>
             <input type="text" id="nombreEquipo" name="nombreEquipo" required value="<?php echo htmlspecialchars($row['Nombre']); ?>">
@@ -77,10 +79,8 @@
             <label for="dispositivoID">ID Del ESP32:</label>
             <input type="text" id="DisID" name="DisID" required value="<?php echo $row['ClaveDisp']; ?>">
 
-            <button type="submit">Guardar Equipo</button> 
-            <a href="../views/equipos.php">
-                <button>Cancelar</button>
-            </a>
+            <button type="submit" id="buttonCentral" class="buttonNormal">Guardar Equipo</button> 
         </form>
+        <a href="<?php echo BASE_URL?>GRUD/Leer/listaEquipos.php"><button id="buttonCentral" class="buttonEliminar">Cancelar</button></a>
     </div>
 </body>

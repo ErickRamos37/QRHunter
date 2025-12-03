@@ -1,19 +1,22 @@
 <?php
-include_once("../config/conexion.php");
+require_once("../../config/config.php");
+require_once(RUTA_RAIZ."/config/conexion.php"); 
+require_once(RUTA_RAIZ."/views/header.php");
 $conn = conectarBD();
-$id_usuario = $_POST["idUser"];
+
+$id_equipo = $_POST["idUser"];
 $nombre = $_POST["nombreEquipo"];
 $escuela_id = $_POST["escuela"];
 $id_disp = $_POST["dispositivo"];
 $esp32id = $_POST["DisID"];
 
-$sql = "update usuarios set
+$sql = "update Equipos set
     nombre = ?,
     escuela_id = ?,
     id_disp = ?,
     esp32id = ?
 WHERE 
-    id_usuario = ?";
+    id_equipo = ?";
 try {
     $sentencia = $conn->prepare($sql);
 
@@ -22,14 +25,14 @@ try {
         $escuela_id,
         $id_disp,
         $esp32id,
-        $id_usuario  
+        $id_equipo  
     ]);
 
     if ($sentencia->rowCount() > 0) {
-        header("Location:../views/equipos.php?actualizado=true");
+        header("Location:".BASE_URL."GRUD/Leer/listaEquipos.php?actualizado=true");
         exit();
     } else {
-        header("Location:../views/equipos.php?aviso=no_cambios");
+        header("Location:".BASE_URL."GRUD/Leer/listaEquipos.php?aviso=no_cambios");
         exit();
     }
 } catch (PDOException $e) {
