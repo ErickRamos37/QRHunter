@@ -207,3 +207,78 @@ input, select, textarea {
     margin-top: 10px;
     font-weight: bold;
 }
+/* ==================================================== */
+/* ----------- Estilos para DataTables (Buscador/Paginación) ----------- */
+/* ==================================================== */
+
+/* Contenedor principal de DataTables para centrar el contenido */
+.dataTables_wrapper {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    /* Asegura que el contenido (buscador, paginación) se centre mejor si el contenedor 'container' es grande */
+}
+
+/* Contenedor del buscador (input de filtro) */
+.dataTables_filter {
+    text-align: right; /* Alineación del buscador a la derecha */
+    margin-bottom: 15px;
+}
+
+/* Estilo del campo de búsqueda (input) */
+.dataTables_filter input {
+    width: 200px; /* Reducir el ancho para que no ocupe todo */
+    padding: 8px 12px;
+    border: 1px solid #0e6021; /* Borde con tu color principal */
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: border-color 0.3s ease;
+}
+
+.dataTables_filter input:focus {
+    border-color: #0b4c19;
+    outline: none;
+}
+
+/* Estilo para el área de paginación y la información "Mostrando X de Y" */
+.dataTables_info, .dataTables_paginate {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: #333;
+}
+
+/* Contenedor de paginación (botones Anterior/Siguiente) */
+.dataTables_paginate {
+    text-align: right; /* Alineación a la derecha para la paginación */
+}
+
+/* Botones de paginación (números, anterior, siguiente) */
+.paginate_button {
+    background-color: transparent;
+    color: #0e6021 !important;
+    border: 1px solid #0e6021;
+    padding: 6px 12px;
+    margin: 0 4px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.paginate_button:hover {
+    background-color: #0e6021;
+    color: white !important;
+    text-decoration: none;
+}
+
+/* Botón activo o deshabilitado */
+.paginate_button.current {
+    background-color: #0b4c19; /* Color más oscuro para el botón actual */
+    color: white !important;
+    border-color: #0b4c19;
+}
+
+.paginate_button.disabled {
+    color: #ccc !important;
+    border-color: #ccc;
+    cursor: default;
+}
