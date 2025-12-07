@@ -21,6 +21,10 @@
     <div class="container">
 
         <h2>Lista de Escuelas Registradas</h2>
+        
+        <a href="../Formularios/crearescuela.php"><button class="buttonNormal">➕ Agregar Nueva Escuela</button></a>
+        
+
         <table id="tablaEscuelas" class="display"> 
             <thead>
                 <tr>
@@ -35,9 +39,6 @@
                 <?php
                 try {
                     // Consulta SQL para obtener escuelas reales.
-                    // Se usa LIMIT 3 para asegurar al menos tres registros, 
-                    // aunque si quieres *todos* los datos para el buscador, quita el LIMIT.
-                    // Si tienes más de 3, se listarán todos.
                     $sql = $conn->query("SELECT id_escuela, nombre, idciudad, fecha_registro FROM escuelas ORDER BY id_escuela DESC"); 
 
                     // Bucle para ITERAR sobre los resultados REALES de la base de datos
@@ -71,7 +72,6 @@
         $(document).ready(function() {
             $('#tablaEscuelas').DataTable({
                 "language": {
-                    // Configuración para poner los textos en español
                     "url": "https://cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
                 },
                 "paging": true,     
