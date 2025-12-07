@@ -1,8 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
 <?php
+    // Asegúrate de que estas rutas sean correctas
     require_once("../../config/config.php");
     require_once(RUTA_RAIZ."/config/conexion.php"); 
     require_once(RUTA_RAIZ."/views/header.php");
@@ -14,12 +14,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Hunter - Escuelas</title>
     <link rel="stylesheet" href="<?php echo RUTA_CSS?>styles.css">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
 </head>
 <body>
     <div class="container">
 
         <h2>Lista de Escuelas Registradas</h2>
-        <table id="tablaEscuelas">
+        <table id="tablaEscuelas" class="display"> 
             <thead>
                 <tr>
                     <th>ID</th>
@@ -32,8 +34,9 @@
             <tbody>
                 <?php
                 try {
-                    // Sentencia SELECT para la tabla escuelas
-                    $sql = $conn->query("SELECT id_escuela, nombre, idciudad, fecha_registro FROM escuelas ORDER BY id_escuela DESC LIMIT 20");
+                    // Sentencia SELECT. Mantengo el LIMIT 20 por si el original era por rendimiento. 
+                    // DataTables maneja la paginación, así que podrías quitar el LIMIT si quieres todos los registros.
+                    $sql = $conn->query("SELECT id_escuela, nombre, idciudad, fecha_registro FROM escuelas ORDER BY id_escuela DESC"); 
 
                     while ($escuela = $sql->fetch(PDO::FETCH_ASSOC)) {
                     ?>
@@ -43,9 +46,11 @@
                             <td><?php echo htmlspecialchars($escuela["idciudad"]) ?></td>
                             <td><?php echo htmlspecialchars($escuela["fecha_registro"]) ?></td>
                             <td>
-                                <a href="../Formularios/formularioEditarEscuela.php?id_escuela=<?php echo $escuela["id_escuela"] ?>"><button>Editar</button></a>
-                                <a href="../GRUD/eliminarEscuela.php?id_escuela=<?php echo $escuela['id_escuela'] ?>" 
-                                    onclick="return confirm('¿Estás seguro de que quieres eliminar esta escuela?');"><button>Eliminar</button></a>
+                                <div>
+                                    <a href="../Formularios/formularioEditarEscuela.php?id_escuela=<?php echo $escuela["id_escuela"] ?>"><button class="btn-editar">Editar</button></a>
+                                    <a href="../GRUD/eliminarEscuela.php?id_escuela=<?php echo $escuela['id_escuela'] ?>" 
+                                        onclick="return confirm('¿Estás seguro de que quieres eliminar esta escuela?');"><button class="btn-eliminar">Eliminar</button></a>
+                                </div>
                             </td>
                         </tr>
                     <?php
@@ -57,5 +62,26 @@
             </tbody>
         </table>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Inicializa DataTables en el elemento con ID 'tablaEscuelas'
+            $('#tablaEscuelas').DataTable({
+                "language": {
+                    // Configuración para poner los textos en español
+                    "url": "https://cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+                },
+                // Opciones adicionales (opcional, puedes agregar aquí configuraciones específicas)
+                "paging": true,     // Habilitar paginación
+                "ordering": true,   // Habilitar ordenamiento de columnas
+                "info": true,       // Mostrar información de registros
+                "searching": true   // Habilitar la barra de búsqueda
+            });
+        });
+    </script>
+    
 </body>
 </html>
