@@ -20,7 +20,7 @@
             <ul class="nav-links">
                 <li><a href="<?php echo BASE_URL?>views/ranking.php">Ranking</a></li>
                 <li><a href="<?php echo BASE_URL?>GRUD/Leer/listaEquipos.php">Equipos</a></li>
-                <li><a href="<?php echo BASE_URL?>views/escuelas.php">Escuelas</a></li>
+                <li><a href="<?php echo BASE_URL?>GRUD/Leer/escuelas.php">Escuelas</a></li>
                 <li><a href="<?php echo BASE_URL?>views/ciudades.php">Ciudades</a></li>
                 <li><a href="<?php echo BASE_URL?>views/dispositivos.php">Dispositivos</a></li>
                 <li><a href="<?php echo BASE_URL?>views/qr.php">QR</a></li>
