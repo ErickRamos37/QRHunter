@@ -18,7 +18,7 @@
         <h1 class="titleheader">QR Hunter</h1>
         <nav>
             <ul class="nav-links">
-                <li><a href="<?php echo BASE_URL?>views/ranking.php">Ranking</a></li>
+                <li><a href="<?php echo BASE_URL?>views/dashboard.php">Ranking</a></li>
                 <li><a href="<?php echo BASE_URL?>GRUD/Leer/listaEquipos.php">Equipos</a></li>
                 <li><a href="<?php echo BASE_URL?>GRUD/Leer/escuelas.php">Escuelas</a></li>
                 <li><a href="<?php echo BASE_URL?>views/ciudades.php">Ciudades</a></li>
