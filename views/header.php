@@ -25,13 +25,13 @@
                 <li><a href="<?php echo BASE_URL?>views/dispositivos.php">Dispositivos</a></li>
                 <li><a href="<?php echo BASE_URL?>views/qr.php">QR</a></li>
 
-                <li class="dropdown">
-                    <button class="dropbtn"><?php echo isset($_SESSION['admin']) ? $_SESSION['admin'] : 'Usuario'; ?> &#x25BC;</button>
+                <div class="dropdown">
+                    <button class="dropbtn">Menu</button>
+                    
                     <div class="dropdown-content">
-                        <a href="<?php echo BASE_URL?>views/indexAdmin.php">Administradores</a>
-                        <a href="<?php echo BASE_URL?>views/logout.php">Cerrar Sesión</a>
-                    </div>
-                </li>
+                        <a href="../views/indexAdmin.php">Administadores</a>
+                        <a href="/QRHunter/logout.php">Cerrar Sesión</a>
+                </div>
             </ul>
         </nav>
     </header>
