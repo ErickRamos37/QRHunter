@@ -67,61 +67,40 @@ nav a:hover {
 
 /* --- Estilos para el Dropdown (Menú Desplegable) --- */
 
-.dropdown {
+.dropdown{
     position: relative;
-    display: inline-block; /* Para que el menú se coloque correctamente */
-    margin-left: 10px; /* Espacio adicional para separarlo de los enlaces */
+    display: inline-block;
 }
 
-/* Botón del Dropdown (Nombre del Administrador) */
-.dropbtn {
-    background-color: var(--color-principal); /* Color de fondo verde oscuro */
-    color: white; /* Texto blanco */
-    padding: 8px 15px;
-    font-size: 14px;
-    font-weight: bold;
+.dropbtn{
+    background-color: #2e7d32;
+    color: white;
+    padding: 10px 15px;
     border: none;
     cursor: pointer;
-    border-radius: 4px; /* Bordes redondeados */
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    transition: background-color 0.3s ease;
+    border-radius: 5px;
+    display: block;
 }
 
-.dropbtn:hover, .dropbtn:focus {
-    background-color: #2E8B57; /* Un verde un poco más claro al pasar el ratón */
-}
-
-/* Contenido del Dropdown */
 .dropdown-content {
-    display: none; /* Oculto por defecto */
+    display: none;
     position: absolute;
-    background-color: #f9f9f9;
+    right: 0;
     min-width: 160px;
+    border: none;
+    background-color: white;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-    right: 0; /* Alineamos el menú a la derecha del botón */
-    border-radius: 4px;
-    overflow: hidden; /* Para que los bordes redondeados se apliquen a los enlaces */
 }
 
-/* Enlaces dentro del Dropdown */
-.dropdown-content a {
-    color: var(--color-texto);
+.dropdown-content a{
+    color: #333;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-    font-weight: normal; /* Menos énfasis que los enlaces principales */
+    background-color: transparent;
 }
 
-/* Hover en los enlaces del Dropdown */
-.dropdown-content a:hover {
-    background-color: #f1f1f1;
-    color: var(--color-principal);
-}
-
-/* Mostrar el contenido del dropdown al pasar el ratón sobre el elemento padre (clase .dropdown) */
 .dropdown:hover .dropdown-content {
-    display: block;
+    display: block; 
 }
