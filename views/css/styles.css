@@ -122,7 +122,6 @@ input, textarea, select {
 }
 
 
-
 .boton-enlace {
   background-color: #0e6021 !important; /* Forzar el color de fondo */
   color: white !important;             /* Forzar el color del texto */
@@ -281,4 +280,15 @@ input, select, textarea {
     color: #ccc !important;
     border-color: #ccc;
     cursor: default;
+}
+
+.header-acciones {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.dataTables_wrapper .dataTables_filter {
+    margin-bottom: 15px;
 }

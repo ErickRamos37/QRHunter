@@ -1,6 +1,11 @@
 <?php
-include("../config/conexion.php");
+require_once("../../config/config.php");
+require_once(RUTA_RAIZ."/config/conexion.php");
+
 $conn = conectarBD();
+?>
+
+<?php
 
 $id_qr = $_GET["id_qr"];
 
@@ -10,7 +15,7 @@ try {
     $sentencia = $conn->prepare($sql);
     $sentencia->execute([$id_qr]);
     
-    header("Location:../views/qr.php");
+    header("Location: ../../views/qr.php");
     exit();
 
 } catch (PDOException $e) {
