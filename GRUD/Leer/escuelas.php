@@ -2,34 +2,23 @@
 <!DOCTYPE html>
 <html lang="es">
 
+<?php
+    require_once("../../config/config.php");
+    require_once(RUTA_RAIZ."/config/conexion.php"); 
+    require_once(RUTA_RAIZ."/views/header.php");
+    $conn = conectarBD();
+?>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Hunter - Escuelas</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="<?php echo RUTA_CSS?>styles.css">
 </head>
 <body>
-    <?php
-
-    require_once("../config/conexion.php");
-    require_once("header.php");             
-    $conn = conectarBD();
-    ?>
     <div class="container">
 
-        <h2>Registrar Nueva Escuela</h2>
-        <form id="escuelaForm" method="POST" action="../GRUD/insertarEscuela.php">
-
-            <label for="nombre">Nombre de la Escuela:</label>
-            <input type="text" id="nombre" name="nombre" required>
-
-            <label for="idciudad">ID de la Ciudad:</label>
-            <input type="number" id="idciudad" name="idciudad" required min="1">
-
-            <button type="submit">Guardar Escuela</button>
-        </form>
-
-        <hr> <h2>Lista de Escuelas Registradas</h2>
+        <h2>Lista de Escuelas Registradas</h2>
         <table id="tablaEscuelas">
             <thead>
                 <tr>
@@ -69,5 +58,4 @@
         </table>
     </div>
 </body>
-
 </html>

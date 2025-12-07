@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <?php
     require_once("../config/config.php");
-    require_once(RUTA_RAIZ."/config/conexion.php"); 
+    require_once(RUTA_RAIZ."/config/conexion.php");
+    require_once("../config/conexion.php");
     require_once(RUTA_RAIZ."/views/header.php");
     $conn = conectarBD();
 ?>
@@ -13,7 +14,7 @@
     </head>
     <body>
         <div>
-
+            <h2>Ranking De Los Mejores Equipos - QRHunters</h2>
         </div>
     </body>
 </html>
