@@ -1,20 +1,21 @@
-// Formularios/formularioEditarEscuela.php
 <!DOCTYPE html>
 <html lang="es">
+
+<?php
+    require_once("../../config/config.php");
+    require_once(RUTA_RAIZ."/config/conexion.php"); 
+    require_once(RUTA_RAIZ."/views/header.php");
+    $conn = conectarBD();
+?>
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Hunter - Editar Escuela</title>
-    <link rel="stylesheet" href="../views/css/styles.css">
+    <link rel="stylesheet" href="<?php echo RUTA_CSS?>styles.css">
 </head>
 
 <body>
-    <?php
-    require("../Config/conexion.php");
-    require("../views/header.php");
-    $conn = conectarBD();
-    ?>
     <div class="container">
         <h2>Editar Escuela</h2>
         <form action="../GRUD/editarEscuela.php" method="POST">
