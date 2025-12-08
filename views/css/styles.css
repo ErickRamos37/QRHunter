@@ -123,10 +123,10 @@ input, textarea, select {
 
 
 .boton-enlace {
-  background-color: #0e6021 !important; /* Forzar el color de fondo */
-  color: white !important;             /* Forzar el color del texto */
-  padding: 10px !important;            /* Forzar el relleno */
-  border: none !important;             /* Forzar la ausencia de borde */
+  background-color: #0e6021 !important; 
+  color: white !important;             
+  padding: 10px !important;           
+  border: none !important;             
   
   text-decoration: none !important; 
   display: inline-block !important; 
@@ -206,28 +206,23 @@ input, select, textarea {
     margin-top: 10px;
     font-weight: bold;
 }
-/* ==================================================== */
-/* ----------- Estilos para DataTables (Buscador/Paginación) ----------- */
-/* ==================================================== */
 
-/* Contenedor principal de DataTables para centrar el contenido */
 .dataTables_wrapper {
     padding-top: 20px;
     padding-bottom: 20px;
-    /* Asegura que el contenido (buscador, paginación) se centre mejor si el contenedor 'container' es grande */
 }
 
-/* Contenedor del buscador (input de filtro) */
+
 .dataTables_filter {
-    text-align: right; /* Alineación del buscador a la derecha */
+    text-align: right;
     margin-bottom: 15px;
 }
 
-/* Estilo del campo de búsqueda (input) */
+
 .dataTables_filter input {
-    width: 200px; /* Reducir el ancho para que no ocupe todo */
+    width: 200px; 
     padding: 8px 12px;
-    border: 1px solid #0e6021; /* Borde con tu color principal */
+    border: 1px solid #0e6021; 
     border-radius: 8px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     transition: border-color 0.3s ease;
@@ -238,19 +233,17 @@ input, select, textarea {
     outline: none;
 }
 
-/* Estilo para el área de paginación y la información "Mostrando X de Y" */
 .dataTables_info, .dataTables_paginate {
     padding-top: 15px;
     padding-bottom: 15px;
     color: #333;
 }
 
-/* Contenedor de paginación (botones Anterior/Siguiente) */
+
 .dataTables_paginate {
-    text-align: right; /* Alineación a la derecha para la paginación */
+    text-align: right; 
 }
 
-/* Botones de paginación (números, anterior, siguiente) */
 .paginate_button {
     background-color: transparent;
     color: #0e6021 !important;
@@ -269,9 +262,8 @@ input, select, textarea {
     text-decoration: none;
 }
 
-/* Botón activo o deshabilitado */
 .paginate_button.current {
-    background-color: #0b4c19; /* Color más oscuro para el botón actual */
+    background-color: #0b4c19; 
     color: white !important;
     border-color: #0b4c19;
 }
@@ -315,4 +307,87 @@ input, select, textarea {
     float: right;
     font-size: 22px;
     cursor: pointer;
+}
+
+/*css del dashboad colores para las posiciones :) */ 
+
+
+.ranking-container {
+    max-width: 95%;       
+    margin: 40px auto;  
+    text-align: center;
+    padding: 20px;
+    background-color: #fdfdfd; 
+    border-radius: 15px;
+}
+
+.medal-icon {
+    font-size: 2rem;     
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.rank-1 { 
+    background-color: #ffd70040; 
+    border-left: 10px solid #FFD700; 
+    transform: scale(1.01);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+} 
+.rank-2 { 
+    background-color: #c0c0c040; 
+    border-left: 10px solid #C0C0C0; 
+} 
+.rank-3 { 
+    background-color: #cd7f3240; 
+    border-left: 10px solid #CD7F32; 
+}
+
+
+.table-ranking {
+    width: 100%;
+    border-collapse: separate; 
+    border-spacing: 0;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 25px;
+}
+
+.table-ranking th {
+    background-color: #0e6021; 
+    color: white;
+    padding: 20px;       
+    text-transform: uppercase;
+    font-size: 1.2rem;    
+    letter-spacing: 1px;
+}
+
+.table-ranking td {
+    padding: 20px;        
+    border-bottom: 1px solid #eee;
+    font-size: 1.3rem;   
+    vertical-align: middle;
+}
+
+/* Resaltar los puntos */
+.puntos-destacados {
+    font-weight: 800;   
+    color: #0e6021;
+    font-size: 1.6rem;   
+}
+
+/* Fecha/Tiempo */
+.fecha-escaneo {
+    color: #555; 
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+/* Título Principal */
+.ranking-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
