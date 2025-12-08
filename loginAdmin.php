@@ -1,27 +1,35 @@
 <?php
 session_start();
-include __DIR__ . "/config/conexion.php";
-
-$error = "";
+// Usa __DIR__ para asegurar que la ruta sea correcta, sin importar desde dónde se llama.
+include __DIR__ . "/config/conexion.php"; 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $conn = conectarBD();
     
-    $usuario = $_POST['usuario'];
-    $pass    = $_POST['password'];
+    $usuario_ingresado = $_POST['usuario'];
+    $password_ingresada = $_POST['password'];
 
-    $sql = "SELECT * FROM administradores WHERE usuario = :usuario AND password = :password";
+    // Obtener el registro completo (incluyendo el hash de la contraseña)
+    $sql = "SELECT id, usuario, password FROM administradores WHERE usuario = :usuario";
     $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':usuario', $usuario);
-    $stmt->bindParam(':password', $pass);
+    $stmt->bindParam(':usuario', $usuario_ingresado);
     $stmt->execute();
+    
+    // Obtener el registro del administrador
+    $admin = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($stmt->rowCount() > 0) {
-        $_SESSION['admin'] = $usuario;
+    // Verificar si el usuario existe y si la contraseña es correcta
+    if ($admin && password_verify($password_ingresada, $admin['password'])) {
+        // Login exitoso: La contraseña ingresada coincide con el hash almacenado
+        $_SESSION['admin'] = $admin['usuario']; // Usamos el usuario de la DB para más seguridad
+        $_SESSION['admin_id'] = $admin['id'];
+        
+        // Redirigir a la página principal
         header("Location: views/principal.php");
         exit();
     } else {
+        // Fallo: Usuario no encontrado O contraseña incorrecta
         $error = "Usuario o contraseña incorrectos";
     }
 }

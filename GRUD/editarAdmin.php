@@ -3,7 +3,7 @@
 include "../config/conexion.php"; 
 $conn = conectarBD();
 
-// 1. OBTENER ID y DATOS ACTUALES
+// OBTENER ID y DATOS ACTUALES
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT); 
 
 if ($id === false || $id === null) {
@@ -22,7 +22,7 @@ if (!$data) {
     echo "<p class='error-msg'>Error: Administrador no encontrado.</p>";
     exit();
 }
-// 2. RENDERIZAR FORMULARIO DE EDICIÓN
+// RENDERIZAR FORMULARIO DE EDICIÓN
 ?>
 
 <h3>Editar Administrador: <?= htmlspecialchars($data['usuario']) ?></h3>

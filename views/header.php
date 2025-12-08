@@ -3,7 +3,6 @@
 
 <?php
     require_once(RUTA_RAIZ."/config/conexion.php"); 
-    require_once(RUTA_RAIZ."/views/header.php");
     $conn = conectarBD();
 ?>
 
