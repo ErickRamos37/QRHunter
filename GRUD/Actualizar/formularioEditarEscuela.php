@@ -2,24 +2,22 @@
 <html lang="es">
 
 <?php
-    // --- INCLUSIONES CORREGIDAS (SOLO SUBE UN NIVEL ../) ---
-    // [1] Solución al error de ruta en la inclusión de config.php
-    require_once("../config/config.php"); 
+    // --- INCLUSIÓN CORREGIDA (SOLO SUBE UN NIVEL ../) ---
+    require_once("../config/config.php");
     require_once(RUTA_RAIZ."/config/conexion.php"); 
     require_once(RUTA_RAIZ."/views/header.php");
     $conn = conectarBD();
 
-    // LÓGICA AGREGADA: Obtener la lista de ciudades válidas para el SELECT
+    // 1. Obtener la lista de ciudades válidas
     try {
         $sql_ciudades = $conn->query("SELECT id_ciudad, nombre FROM ciudades ORDER BY nombre");
         $ciudades = $sql_ciudades->fetchAll(PDO::FETCH_ASSOC);
     } catch (Exception $e) {
-        // Manejo de error
         echo "<p style='color:red; text-align:center;'>Error al cargar ciudades: " . $e->getMessage() . "</p>";
         $ciudades = [];
     }
 
-    // Lógica para obtener los datos de la escuela a editar
+    // 2. Obtener los datos de la escuela a editar
     if (!isset($_REQUEST["id_escuela"])) {
         header("Location:".$BASE_URL."GRUD/Leer/escuelas.php?error=no_id");
         exit;
@@ -31,7 +29,6 @@
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$row) {
-        // Si no se encuentra la escuela, redirigir
         header("Location:".$BASE_URL."GRUD/Leer/escuelas.php?error=escuela_no_encontrada");
         exit;
     }

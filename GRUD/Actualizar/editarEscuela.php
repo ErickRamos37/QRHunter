@@ -1,5 +1,5 @@
 <?php
-// La inclusión requiere subir dos niveles (../../) para llegar a la raíz (QRHunter/)
+// La inclusión requiere subir dos niveles (../../)
 require_once("../../config/config.php");
 require_once(RUTA_RAIZ."/config/conexion.php"); 
 require_once(RUTA_RAIZ."/views/header.php");
@@ -26,13 +26,11 @@ try {
         $id_escuela  
     ]);
 
-    // Redirección CORREGIDA: Usando BASE_URL para volver al listado
+    // Redirección CORREGIDA: Usando BASE_URL
     if ($sentencia->rowCount() > 0) {
-        // Redirige al listado con un mensaje de éxito
         header("Location:".$BASE_URL."GRUD/Leer/escuelas.php?actualizado=true");
         exit();
     } else {
-        // Redirige al listado si no hubo cambios
         header("Location:".$BASE_URL."GRUD/Leer/escuelas.php?aviso=no_cambios");
         exit();
     }
