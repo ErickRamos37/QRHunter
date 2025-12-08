@@ -20,7 +20,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: ../../views/qr.php");
         exit();
 
-    } catch(PDOException $e) {
+    } 
+    catch(PDOException $e) {
         echo "Error al guardar los datos: " . $e->getMessage();
     }
 

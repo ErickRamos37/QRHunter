@@ -1,6 +1,6 @@
 <?php
 session_start();
-// Usa __DIR__ para asegurar que la ruta sea correcta, sin importar desde dónde se llama.
+
 include __DIR__ . "/config/conexion.php"; 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Verificar si el usuario existe y si la contraseña es correcta
     if ($admin && password_verify($password_ingresada, $admin['password'])) {
-        // Login exitoso: La contraseña ingresada coincide con el hash almacenado
+        
         $_SESSION['admin'] = $admin['usuario']; // Usamos el usuario de la DB para más seguridad
         $_SESSION['admin_id'] = $admin['id'];
         
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: views/principal.php");
         exit();
     } else {
-        // Fallo: Usuario no encontrado O contraseña incorrecta
+    
         $error = "Usuario o contraseña incorrectos";
     }
 }
