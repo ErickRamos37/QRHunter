@@ -2,8 +2,8 @@
 <html lang="es">
 
 <?php
-    // Bloque de inclusión solicitado (3 niveles arriba)
-    require_once("../../../config/config.php"); 
+    // Bloque de inclusión SOLICITADO y CORREGIDO (2 niveles arriba para config)
+    require_once("../../config/config.php"); 
     require_once(RUTA_RAIZ."/config/conexion.php"); 
     require_once(RUTA_RAIZ."/views/header.php");
     $conn = conectarBD(); 
@@ -13,7 +13,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Hunter - Escuelas</title>
-    <link rel="stylesheet" href="<?php echo RUTA_CSS?>styles.css">
+    <link rel="stylesheet" href="../../<?php echo RUTA_CSS?>styles.css"> 
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
 </head>
