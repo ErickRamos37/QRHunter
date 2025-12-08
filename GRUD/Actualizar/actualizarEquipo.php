@@ -40,4 +40,6 @@ try {
     echo "<h1>Error al actualizar los datos</h1>";
     echo "<h2>Detalles Técnicos:</h2>";
     echo "<p>" . $e->getMessage() . "</p>";
+    header("Location:".BASE_URL."GRUD/manejoDeErrores.php");
+    exit();
 }

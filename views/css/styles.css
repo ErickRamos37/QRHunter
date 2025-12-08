@@ -94,6 +94,15 @@ input, textarea, select {
   border-radius: 8px;
   cursor: pointer;
 }
+.buttonGris {
+  background-color: #909090;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
 #buttonCentral {
   margin-top: 14px;
   margin-left: auto;
@@ -101,10 +110,17 @@ input, textarea, select {
   display: block;
   width: 100%;
 }
+
 #buttonALaDerecha {
   margin-left: auto;
   margin-right: 5%;
   display: block;
+}
+#buttonTd {
+  display: flex;
+  justify-content: center;
+  gap: 10px; 
+  margin-top: 20px;
 }
 
 /*Hovers de los botones*/
@@ -119,6 +135,9 @@ input, textarea, select {
 }
 .buttonAdvertencia:hover {
   background-color: #e17604;
+}
+.buttonGris:hover {
+  background-color: #686868;
 }
 
 

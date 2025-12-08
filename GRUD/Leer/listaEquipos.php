@@ -20,7 +20,7 @@
     <div class="container">
 
         <h2>Lista de Equipos Registrados</h2>
-        <a href="<?php echo BASE_URL?>GRUD/Crear/crearEquipo.php"><button class="buttonNormal">Agregar Nuevo Equipo</button></a>
+        <a href="<?php echo BASE_URL?>GRUD/Crear/crearEquipo.php"><button class="buttonNormal">+ Agregar Nuevo Equipo</button></a>
         <table id="tablaEquipos">
             <thead>
                 <tr>
@@ -32,10 +32,15 @@
             </thead>
             <tbody>
                 <?php
-                $sql = $conn->query("Select eq.id_equipo, eq.nombre as Nombre, es.id_escuela, es.nombre as Escuela, dis.id_dispositivo as Dispositivo 
-                        from Equipos eq, escuelas es, dispositivos dis
-                        group by id_equipo order by id_equipo desc
-                        limit 20");
+                $sql = $conn->query("SELECT
+                        eq.id_disp, eq.id_equipo, eq.nombre AS Nombre, eq.fin,
+                        es.nombre AS Escuela,
+                        dis.id_dispositivo AS Dispositivo
+                        FROM Equipos eq
+                        INNER JOIN escuelas es ON eq.escuela_id = es.id_escuela 
+                        INNER JOIN dispositivos dis ON eq.id_disp = dis.id_dispositivo
+                        ORDER BY eq.id_equipo DESC
+                        LIMIT 20");
 
                 while ($equipos = $sql->fetch()) {
                 ?>
@@ -43,10 +48,19 @@
                         <td><?php echo $equipos["Nombre"] ?></td>
                         <td><?php echo $equipos["Escuela"] ?></td>
                         <td><?php echo $equipos["Dispositivo"] ?></td>
-                        <td>
-                            <a href="<?php echo BASE_URL?>GRUD/Actualizar/EditarEquipo.php?id_equipo=<?php echo $equipos["id_equipo"] ?>"><button class="buttonEditar">Editar</button></a>
-                            <a href=""><button class="buttonAdvertencia">Finalizar Ronda</button></a>
-                            <a href="<?php echo BASE_URL?>GRUD/Eliminar/eliminarEquipo.php?id_equipo=<?php echo $equipos['id_equipo'] ?>" onclick="return confirm('¿Estás seguro de eliminar este equipo?');"><button class="buttonEliminar">Eliminar</button></a>
+                        <td class="celdaAcciones">
+                            <a href="<?php echo BASE_URL?>GRUD/Actualizar/EditarEquipo.php?id_equipo=<?php echo $equipos["id_equipo"] ?>" class="aSinMargen"><button class="buttonEditar">Editar</button></a>
+                            
+                            <?php
+                            if(empty($equipos["fin"])) {
+                                $finalizarRonda = BASE_URL . "/GRUD/Actualizar/finalizarRonda.php?id_disp=" . $equipos["id_disp"] . "&id_equipo=" . $equipos['id_equipo'];
+                                echo '<a href="'.$finalizarRonda.'"><button class="buttonAdvertencia">¿Finalizar?</button></a>';
+                            } else {
+                                echo '<button class="buttonGris" disabled>Finalizado...</button>';
+                            }
+                            ?>
+
+                            <a href="<?php echo BASE_URL?>GRUD/Eliminar/eliminarEquipo.php?id_equipo=<?php echo $equipos['id_equipo'] ?>" onclick="return confirm('¿Estás seguro de eliminar este equipo?');" class="aSinMargen"><button class="buttonEliminar">Eliminar</button></a>
                         </td>
                     </tr>
                 <?php
