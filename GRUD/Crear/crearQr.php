@@ -1,8 +1,11 @@
 <?php
 // 1. Configuración y Header
+
+session_start();
 require_once("../../config/config.php");
 require_once(RUTA_RAIZ."/config/conexion.php");
 require_once(RUTA_RAIZ."/views/header.php");
+require_once(RUTA_RAIZ."/config/verificar_sesion.php");
 $conn = conectarBD();
 ?>
 
