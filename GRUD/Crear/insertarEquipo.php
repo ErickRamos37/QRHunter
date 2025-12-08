@@ -9,6 +9,10 @@ $escuela_id = $_POST["escuela"];
 $id_disp = $_POST["dispositivo"];
 $esp32id = $_POST["DisID"];
 
+$sql_estado = "UPDATE dispositivos SET idEstado = 2 WHERE id_dispositivo = ?";
+$sentencia_estado = $conn->prepare($sql_estado);
+$sentencia_estado->execute([$id_disp]);
+
 $sql = "INSERT INTO Equipos(nombre, escuela_id, id_disp, esp32id) 
 VALUES (?, ?, ?, ?)";
 

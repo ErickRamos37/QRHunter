@@ -50,7 +50,7 @@
                         <td><?php echo $equipos["Escuela"] ?></td>
                         <td><?php echo $equipos["Dispositivo"] ?></td>
                         <td class="celdaAcciones">
-                            <a href="<?php echo BASE_URL?>GRUD/Actualizar/EditarEquipo.php?id_equipo=<?php echo $equipos["id_equipo"] ?>" class="aSinMargen"><button class="buttonEditar">Editar</button></a>
+                            <a href="<?php echo BASE_URL?>GRUD/Actualizar/EditarEquipo.php?id_equipo=<?php echo $equipos["id_equipo"] ?>"><button class="buttonEditar">Editar</button></a>
                             
                             <?php
                             if(empty($equipos["fin"])) {
@@ -61,7 +61,7 @@
                             }
                             ?>
 
-                            <a href="<?php echo BASE_URL?>GRUD/Eliminar/eliminarEquipo.php?id_equipo=<?php echo $equipos['id_equipo'] ?>" onclick="return confirm('¿Estás seguro de eliminar este equipo?');" class="aSinMargen"><button class="buttonEliminar">Eliminar</button></a>
+                            <a href="<?php echo BASE_URL?>GRUD/Eliminar/eliminarEquipo.php?id_equipo=<?php echo $equipos['id_equipo'] ?>" onclick="return confirm('¿Estás seguro de eliminar este equipo?');"><button class="buttonEliminar">Eliminar</button></a>
                         </td>
                     </tr>
                 <?php
