@@ -22,7 +22,7 @@
 
         <h2>Lista de Escuelas Registradas</h2>
         
-        <a href="<?php echo RUTA_RAIZ?>/Formularios/crearescuela.php"><button class="buttonNormal"> Agregar Nueva Escuela</button></a>
+<a href="<?php echo BASE_URL?>Formularios/crearescuela.php"><button class="buttonNormal"> Agregar Nueva Escuela</button></a>
         
 
         <table id="tablaEscuelas" class="display"> 
