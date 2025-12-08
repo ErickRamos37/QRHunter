@@ -21,9 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
 
     } 
-    catch(PDOException $e) {
-        echo "Error al guardar los datos: " . $e->getMessage();
-    }
+    catch (PDOException $e) {
+    $error = urlencode($e->getMessage());
+    header("Location: ../manejoDeErrores.php?mensaje=" . $error);
+    exit();
+}
 
 } else {
     header("Location: ../../views/qr.php");

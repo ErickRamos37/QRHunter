@@ -1,13 +1,14 @@
-<!DOCTYPE html>
-<html lang="es">
-
 <?php
+    session_start();
     require_once("../../config/config.php");
+    require_once(RUTA_RAIZ."/config/verificar_sesion.php");
     require_once(RUTA_RAIZ."/config/conexion.php"); 
     require_once(RUTA_RAIZ."/views/header.php");
     $conn = conectarBD();
 ?>
 
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,21 +31,21 @@
             </select>
 
             <label for="escuela">Seleccionar Escuela:</label>
-            <select id="escuela" name="escuela">
-                <option disabled selected>--Elige un Escuela--</option>
+            <select id="escuela" name="escuela" required>
+                <option value="" disabled selected>--Elige un Escuela--</option>
                 <?php
-                $sql = $conn->query("Select es.nombre, es.id_escuela from escuelas es order by nombre;");
-                while ($escuela = $sql->fetch()) {
-                    echo "<option value='{$escuela['id_escuela']}'>{$escuela['nombre']}</option>";
-                }
+                    $sql = $conn->query("SELECT es.nombre, es.id_escuela FROM escuelas es ORDER BY nombre;");
+                    while ($escuela = $sql->fetch()) {
+                        echo "<option value='{$escuela['id_escuela']}'>{$escuela['nombre']}</option>";
+                    }
                 ?>
             </select>
 
-            <label for="dispositivo">Clave Del Dispositivo:</label>
-            <select id="dispositivo" name="dispositivo">
-                <option disabled selected>--Elige un Dispositivo--</option>
+            <label for="dispositivo">Dispositivo:</label>
+            <select id="dispositivo" name="dispositivo" required>
+                <option value="" disabled selected>--Elige un Dispositivo--</option>
                 <?php
-                $sql = $conn->query("Select disp.id_dispositivo from dispositivos disp order by id_dispositivo;");
+                $sql = $conn->query("SELECT disp.id_dispositivo FROM dispositivos disp WHERE disp.idEstado = 1 ORDER BY id_dispositivo;");
                 while ($disp = $sql->fetch()) {
                     echo "<option value='{$disp['id_dispositivo']}'>{$disp['id_dispositivo']}</option>";
                 }

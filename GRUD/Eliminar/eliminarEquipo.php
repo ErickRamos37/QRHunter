@@ -5,7 +5,6 @@ require_once(RUTA_RAIZ."/views/header.php");
 $conn = conectarBD();
 
 if (!isset($_GET["id_equipo"]) || !is_numeric($_GET["id_equipo"])) {
-    // Manejar error si no hay ID válido
     header("Location:".BASE_URL."views/equipos.php?error=no_id");
     exit();
 }
@@ -21,7 +20,6 @@ try {
     $sentencia_equipo = $conn->prepare($sql_equipo);
     $sentencia_equipo->execute([$id_equipo]);
 
-    $conn->commit();
     header("Location:".BASE_URL."GRUD/Leer/listaEquipos.php?success=deleted");
 
 } catch (PDOException $e) {

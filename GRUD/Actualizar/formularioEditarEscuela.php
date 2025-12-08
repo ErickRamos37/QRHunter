@@ -20,7 +20,7 @@ try {
 // --- 2. LÓGICA PARA OBTENER LOS DATOS DE LA ESCUELA A EDITAR ---
 if (!isset($_REQUEST["id_escuela"]) || !is_numeric($_REQUEST["id_escuela"])) {
     // Redirige si no hay ID o el ID no es numérico
-    header("Location:".$BASE_URL."GRUD/Leer/escuelas.php?error=no_id");
+    header("Location:". BASE_URL."GRUD/Leer/escuelas.php?error=no_id");
     exit;
 }
 
@@ -34,7 +34,7 @@ try {
 
     if (!$row) {
         // Redirige si el ID no corresponde a ninguna escuela
-        header("Location:".$BASE_URL."GRUD/Leer/escuelas.php?error=escuela_no_encontrada");
+        header("Location:". BASE_URL."GRUD/Leer/escuelas.php?error=escuela_no_encontrada");
         exit;
     }
 } catch (Exception $e) {

@@ -1,5 +1,6 @@
 <?php
 // La inclusión requiere subir dos niveles (../../) para llegar a la raíz (QRHunter/)
+
 require_once("../../config/config.php");
 require_once(RUTA_RAIZ."/config/conexion.php"); 
 require_once(RUTA_RAIZ."/views/header.php");
