@@ -8,8 +8,7 @@ function cargarFormularioEdicion(id) {
     contentContainer.innerHTML = '<span class="close" onclick="cerrarModal()">&times;</span><h3>Cargando formulario...</h3>'; 
     modal.style.display = 'block';
 
-    // Se usa la ruta que confirmó ser funcional
-    fetch('../GRUD/editarAdmin.php?id=' + id) 
+    fetch('../GRUD/Actualizar/editarAdmin.php?id=' + id) 
         .then(response => {
             if (!response.ok) {
               
@@ -59,4 +58,26 @@ window.onclick = function(event) {
     else if (event.target == modalEliminar) {
         cerrarModalEliminar();
     }
+}
+
+// ==================== VALIDACIÓN DE CONTRASEÑAS EN CREACIÓN ====================
+function validarCreacion() {
+    //console.log("Validación de creación iniciada.");
+    // Obtener los valores de los campos 
+    const pass = document.getElementById('crear_password').value;
+    const passConfirm = document.getElementById('crear_password_confirm').value;
+
+    // Realizar la comparación
+    if (pass !== passConfirm) {
+        // Mostrar un mensaje de error y bloquear el envío
+        alert('ADVERTENCIA: Las contraseñas no coinciden. Por favor, revísalas.');
+        
+        // Limpiar los campos y poner el foco para corrección
+        document.getElementById('crear_password').value = '';
+        document.getElementById('crear_password_confirm').value = '';
+        document.getElementById('crear_password').focus();
+
+        return false;
+    }
+    return true;
 }

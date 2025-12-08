@@ -1,8 +1,9 @@
 <?php
 session_start();
 
-require_once("../config/config.php");
+require_once("../../config/config.php");
 require_once(RUTA_RAIZ."/config/conexion.php");
+require_once(RUTA_RAIZ."/config/verificar_sesion.php");
 $conn = conectarBD();
 
 
@@ -24,18 +25,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_a_eliminar'])) {
         $stmt->execute();
 
         // Redirigir de vuelta a la lista de administradores
-        header("Location: ../views/indexAdmin.php?deleted=1");
+        header("Location: ../../views/indexAdmin.php?deleted=1");
         exit();
         
     } else {
         // Manejar caso donde el ID es inválido o no existe
-        header("Location: ../views/indexAdmin.php?error=invalid_id");
+        header("Location: ../../views/indexAdmin.php?error=invalid_id");
         exit();
     }
 
 } else {
     // Si no se recibe POST, redirigir a la página principal
-    header("Location: ../views/indexAdmin.php");
+    header("Location: ../../views/indexAdmin.php");
     exit();
 }
 ?>
