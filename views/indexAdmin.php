@@ -1,12 +1,13 @@
 <?php
 session_start();
-    require_once("../config/config.php");
-    require_once(RUTA_RAIZ."/config/conexion.php"); 
-    require_once(RUTA_RAIZ."/views/header.php");
-    require_once(RUTA_RAIZ."/config/verificar_sesion.php");
-    $conn = conectarBD();
+// Asegúrate de que las rutas relativas a RUTA_RAIZ estén correctas
+require_once("../config/config.php"); 
+require_once(RUTA_RAIZ."/config/conexion.php"); 
+require_once(RUTA_RAIZ."/views/header.php");
+require_once(RUTA_RAIZ."/config/verificar_sesion.php");
+$conn = conectarBD();
 
-//  PROCESAR CREACIÓN
+// PROCESAR CREACIÓN
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crear_usuario'])) {
 
     $usuario = trim($_POST['crear_usuario']);
@@ -18,8 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crear_usuario'])) {
     header("Location: indexAdmin.php?created=1");
     exit;
 }
-
-//  PROCESAR EDICIÓN
+// PROCESAR EDICIÓN
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editar_id'])) {
 
     $id = $_POST['editar_id'];
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editar_id'])) {
     exit;
 }
 
-//  OBTENER LISTA DE ADMINS
+// OBTENER LISTA DE ADMINS
 $stmt = $conn->query("SELECT * FROM administradores ORDER BY id ASC");
 $lista = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -57,7 +57,6 @@ $lista = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <h2>Administradores</h2>
 
-    <!-- FORM CREAR -->
     <h3>Crear Nuevo Administrador</h3>
     <form method="POST" class="form-box">
         <label>Usuario:</label>
@@ -71,7 +70,6 @@ $lista = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <hr>
 
-    <!-- LISTA -->
     <h3>Lista de Administradores</h3>
 
     <table class="table-admin">
@@ -88,12 +86,12 @@ $lista = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <td><?= $row['id'] ?></td>
                 <td><?= $row['usuario'] ?></td>
                 <td>
-                    <button class="buttonEditar" onclick="abrirModal('<?= $row['id'] ?>', '<?= $row['usuario'] ?>')">
+                    <button class="buttonEditar" onclick="cargarFormularioEdicion(<?= $row['id'] ?>)">
                         Editar
                     </button>
 
                     <a href="../GRUD/eliminarAdmin.php?id=<?= $row['id'] ?>" 
-                       onclick="return confirm('¿Eliminar administrador <?= $row['usuario']?>?');">
+                        onclick="return confirm('¿Eliminar administrador <?= $row['usuario']?>?');">
                         <button class="buttonEliminar">Eliminar</button>
                     </a>
                 </td>
@@ -104,37 +102,53 @@ $lista = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 </div>
 
-
-<!-- MODAL EDITAR -->
 <div id="modalEditar" class="modal">
     <div class="modal-content">
-        <span class="cerrar" onclick="cerrarModal()">&times;</span>
-        <h3>Editar Administrador</h3>
-
-        <form method="POST">
-            <input type="hidden" name="editar_id" id="editar_id">
-
-            <label>Usuario:</label>
-            <input type="text" name="editar_usuario" id="editar_usuario" required>
-
-            <label>Nueva contraseña (opcional):</label>
-            <input type="password" name="editar_password">
-
-            <button type="submit" class="buttonNormal">Guardar Cambios</button>
-        </form>
+        <div id="modal-body-content">
+            <p>Cargando formulario...</p>
+        </div>
     </div>
 </div>
 
 
 <script>
-function abrirModal(id, usuario) {
-    document.getElementById("editar_id").value = id;
-    document.getElementById("editar_usuario").value = usuario;
-    document.getElementById("modalEditar").style.display = "block";
+// Función principal que usa Fetch para obtener el formulario de editarAdmin.php
+function cargarFormularioEdicion(id) {
+    const modal = document.getElementById("modalEditar");
+    const contentContainer = document.getElementById("modal-body-content");
+    contentContainer.innerHTML = '<h3>Cargando formulario...</h3>'; // Mensaje de carga
+
+    // 1. Solicitud Fetch a editarAdmin.php con el ID del registro
+    fetch('../GRUD/editarAdmin.php?id=' + id)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al cargar los datos.');
+            }
+            return response.text();
+        })
+        .then(html => {
+            // 2. Inyectar el HTML del formulario en el contenedor
+            contentContainer.innerHTML = html;
+            modal.style.display = 'block';
+        })
+        .catch(error => {
+            console.error('Fetch error:', error);
+            contentContainer.innerHTML = '<h3>Error al cargar el formulario.</h3><p>' + error.message + '</p>';
+            modal.style.display = 'block'; 
+        });
 }
 
+// Función para cerrar el modal
 function cerrarModal() {
     document.getElementById("modalEditar").style.display = "none";
+}
+
+// Cerrar el modal al hacer clic en el fondo oscuro
+window.onclick = function(event) {
+    var modal = document.getElementById("modalEditar");
+    if (event.target == modal) {
+        cerrarModal();
+    }
 }
 </script>
 

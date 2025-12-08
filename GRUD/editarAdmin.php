@@ -1,46 +1,45 @@
 <?php
-include "../Config/conexion.php";
+
+include "../config/conexion.php"; 
 $conn = conectarBD();
 
-$id = $_GET['id'];
+// 1. OBTENER ID y DATOS ACTUALES
+$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT); 
 
-$stmt = $conn->prepare("SELECT * FROM administradores WHERE id = :id");
+if ($id === false || $id === null) {
+    http_response_code(400); 
+    echo "<p class='error-msg'>Error: ID de administrador no válido.</p>";
+    exit();
+}
+
+$stmt = $conn->prepare("SELECT id, usuario FROM administradores WHERE id = :id");
 $stmt->bindParam(':id', $id);
 $stmt->execute();
 $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $usuario = $_POST['usuario'];
-    $pass    = $_POST['password'];
-
-    $sql = "UPDATE administradores SET usuario=:usuario, password=:password WHERE id=:id";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':usuario', $usuario);
-    $stmt->bindParam(':password', $pass);
-    $stmt->bindParam(':id', $id);
-    $stmt->execute();
-
-    header("Location: indexAdmin.php");
+if (!$data) {
+    http_response_code(404);
+    echo "<p class='error-msg'>Error: Administrador no encontrado.</p>";
     exit();
 }
+// 2. RENDERIZAR FORMULARIO DE EDICIÓN
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<title>Editar Admin</title>
-</head>
-<body>
+<h3>Editar Administrador: <?= htmlspecialchars($data['usuario']) ?></h3>
 
-<h2>Editar Administrador</h2>
+<form action="indexAdmin.php" method="POST">
+    <input type="hidden" name="editar_id" value="<?= $data['id'] ?>"> 
 
-<form method="POST">
-    Usuario: <input type="text" name="usuario" value="<?= $data['usuario'] ?>"><br><br>
-    Password: <input type="text" name="password" value="<?= $data['password'] ?>"><br><br>
+    <label>Usuario:</label>
+    <input type="text" name="editar_usuario" value="<?= htmlspecialchars($data['usuario']) ?>" required>
 
-    <button type="submit">Actualizar</button>
+    <label>Nueva contraseña (opcional):</label>
+    <input type="password" name="editar_password" placeholder="Dejar vacío para no cambiar">
+
+    <button type="submit" class="buttonNormal">Guardar Cambios</button>
+    <button type="button" class="buttonAdvertencia" onclick="cerrarModal()">Cancelar</button>
 </form>
 
-</body>
-</html>
+<?php
+exit();
+?>
