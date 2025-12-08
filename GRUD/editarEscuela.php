@@ -2,10 +2,13 @@
 <?php
 include_once("../config/conexion.php");
 $conn = conectarBD();
+<?php
+    require_once("../../config/config.php");
+    require_once(RUTA_RAIZ."/config/conexion.php"); 
+    require_once(RUTA_RAIZ."/views/header.php");
+    $conn = conectarBD();
+?>
 
-$id_escuela = $_POST["id_escuela"];
-$nombre = $_POST["nombre"];
-$idciudad = $_POST["idciudad"];
 
 // Sentencia UPDATE: Solo actualizamos nombre e idciudad
 $sql = "UPDATE escuelas SET
