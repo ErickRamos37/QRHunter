@@ -94,6 +94,15 @@ input, textarea, select {
   border-radius: 8px;
   cursor: pointer;
 }
+.buttonGris {
+  background-color: #909090;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
 #buttonCentral {
   margin-top: 14px;
   margin-left: auto;
@@ -101,10 +110,17 @@ input, textarea, select {
   display: block;
   width: 100%;
 }
+
 #buttonALaDerecha {
   margin-left: auto;
   margin-right: 5%;
   display: block;
+}
+#buttonTd {
+  display: flex;
+  justify-content: center;
+  gap: 10px; 
+  margin-top: 20px;
 }
 
 /*Hovers de los botones*/
@@ -120,13 +136,36 @@ input, textarea, select {
 .buttonAdvertencia:hover {
   background-color: #e17604;
 }
+.buttonGris:hover {
+  background-color: #686868;
+}
 
+/* Letras de Advertencia */
+.letrasRojas {
+  color: #CC0000;
+  font-weight: bold;
+  margin-bottom: 0%;
+}
+.menorMargen {
+  margin-top: 0%;
+  margin-bottom: 0%;
+}
+
+.celdaAcciones {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.aSinMargen {
+    margin: 0;
+}
 
 .boton-enlace {
-  background-color: #0e6021 !important; 
-  color: white !important;             
-  padding: 10px !important;           
-  border: none !important;             
+  background-color: #0e6021 !important; /* Forzar el color de fondo */
+  color: white !important;             /* Forzar el color del texto */
+  padding: 10px !important;            /* Forzar el relleno */
+  border: none !important;             /* Forzar la ausencia de borde */
   
   text-decoration: none !important; 
   display: inline-block !important; 
@@ -206,23 +245,28 @@ input, select, textarea {
     margin-top: 10px;
     font-weight: bold;
 }
+/* ==================================================== */
+/* ----------- Estilos para DataTables (Buscador/Paginación) ----------- */
+/* ==================================================== */
 
+/* Contenedor principal de DataTables para centrar el contenido */
 .dataTables_wrapper {
     padding-top: 20px;
     padding-bottom: 20px;
+    /* Asegura que el contenido (buscador, paginación) se centre mejor si el contenedor 'container' es grande */
 }
 
-
+/* Contenedor del buscador (input de filtro) */
 .dataTables_filter {
-    text-align: right;
+    text-align: right; /* Alineación del buscador a la derecha */
     margin-bottom: 15px;
 }
 
-
+/* Estilo del campo de búsqueda (input) */
 .dataTables_filter input {
-    width: 200px; 
+    width: 200px; /* Reducir el ancho para que no ocupe todo */
     padding: 8px 12px;
-    border: 1px solid #0e6021; 
+    border: 1px solid #0e6021; /* Borde con tu color principal */
     border-radius: 8px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     transition: border-color 0.3s ease;
@@ -233,17 +277,19 @@ input, select, textarea {
     outline: none;
 }
 
+/* Estilo para el área de paginación y la información "Mostrando X de Y" */
 .dataTables_info, .dataTables_paginate {
     padding-top: 15px;
     padding-bottom: 15px;
     color: #333;
 }
 
-
+/* Contenedor de paginación (botones Anterior/Siguiente) */
 .dataTables_paginate {
-    text-align: right; 
+    text-align: right; /* Alineación a la derecha para la paginación */
 }
 
+/* Botones de paginación (números, anterior, siguiente) */
 .paginate_button {
     background-color: transparent;
     color: #0e6021 !important;
@@ -262,8 +308,9 @@ input, select, textarea {
     text-decoration: none;
 }
 
+/* Botón activo o deshabilitado */
 .paginate_button.current {
-    background-color: #0b4c19; 
+    background-color: #0b4c19; /* Color más oscuro para el botón actual */
     color: white !important;
     border-color: #0b4c19;
 }
