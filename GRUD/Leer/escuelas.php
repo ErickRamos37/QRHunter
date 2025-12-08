@@ -2,7 +2,7 @@
 <html lang="es">
 
 <?php
-    // Bloque de inclusión SOLICITADO y CORREGIDO (2 niveles arriba para config)
+    // Rutas originales antes de la corrección a ../../
     require_once("../../config/config.php"); 
     require_once(RUTA_RAIZ."/config/conexion.php"); 
     require_once(RUTA_RAIZ."/views/header.php");
@@ -13,7 +13,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Hunter - Escuelas</title>
-    <link rel="stylesheet" href="../../<?php echo RUTA_CSS?>styles.css"> 
+    <link rel="stylesheet" href="<?php echo RUTA_CSS?>styles.css"> 
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
 </head>
@@ -22,7 +22,7 @@
 
         <h2>Lista de Escuelas Registradas</h2>
         
-        <a href="../../Formularios/crearescuela.php"><button class="buttonNormal">➕ Agregar Nueva Escuela</button></a>
+        <a href="../Formularios/crearescuela.php"><button class="buttonNormal">➕ Agregar Nueva Escuela</button></a>
         
 
         <table id="tablaEscuelas" class="display"> 
@@ -48,9 +48,9 @@
                             <td><?php echo htmlspecialchars($escuela["idciudad"]) ?></td>
                             <td><?php echo htmlspecialchars($escuela["fecha_registro"]) ?></td>
                             <td>
-                                <a href="../../Formularios/formularioEditarEscuela.php?id_escuela=<?php echo $escuela["id_escuela"] ?>"><button class="buttonEditar">Editar</button></a>
+                                <a href="../Formularios/formularioEditarEscuela.php?id_escuela=<?php echo $escuela["id_escuela"] ?>"><button class="buttonEditar">Editar</button></a>
                                 
-                                <a href="../Eliminar/eliminarEscuela.php?id_escuela=<?php echo $escuela['id_escuela'] ?>" 
+                                <a href="../GRUD/eliminarEscuela.php?id_escuela=<?php echo $escuela['id_escuela'] ?>" 
                                     onclick="return confirm('¿Estás seguro de que quieres eliminar esta escuela?');"><button class="buttonEliminar">Eliminar</button></a>
                             </td>
                         </tr>
