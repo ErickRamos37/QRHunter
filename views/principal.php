@@ -19,7 +19,7 @@ if (!isset($_SESSION['admin'])) {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>�rea de Administrador - QR Hunter</title>
+    <title>Area de Administrador - QR Hunter</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
