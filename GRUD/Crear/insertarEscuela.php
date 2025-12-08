@@ -13,7 +13,7 @@ $idciudad = $_POST["idciudad"];
 
 // Sentencia SQL para la inserción
 // No se incluye id_escuela porque es AUTO_INCREMENT.
-$sql = "INSERT INTO escuelas(nombre, idciudad) VALUES (?, ?)";
+$sql = "INSERT INTO escuelas(nombre, idciudad, fecha_registro) VALUES (?, ?, NOW())";
 
 try {
     $sentencia = $conn->prepare($sql);
