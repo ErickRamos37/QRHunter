@@ -48,7 +48,7 @@
     <div class="container">
         <h2>Editar Escuela</h2>
         
-        <form action="<?php echo BASE_URL?>GRUD/Actualizar/editarEscuela.php" method="POST">
+        <form action="<?php echo BASE_URL?>../GRUD/Actualizar/editarEscuela.php" method="POST">
             
 
             <input type="Hidden" name="id_escuela" required value="<?php echo htmlspecialchars($row['id_escuela']); ?>">
