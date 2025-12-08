@@ -25,7 +25,7 @@
                 <li><a href="<?php echo BASE_URL?>views/qr.php">QR</a></li>
 
                 <div class="dropdown">
-                    <button class="dropbtn"><?php echo $_SESSION['admin']?></button>
+                    <button class="dropbtn"><?php echo $_SESSION['admin']?>▼</button>
                     
                     <div class="dropdown-content">
                         <a href="<?php echo BASE_URL?>views/indexAdmin.php">Administadores</a>
