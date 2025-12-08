@@ -26,11 +26,11 @@
                 <li><a href="<?php echo BASE_URL?>views/qr.php">QR</a></li>
 
                 <div class="dropdown">
-                    <button class="dropbtn">Menu</button>
+                    <button class="dropbtn"><?php echo $_SESSION['admin']?></button>
                     
                     <div class="dropdown-content">
-                        <a href="../views/indexAdmin.php">Administadores</a>
-                        <a href="/QRHunter/logout.php">Cerrar Sesión</a>
+                        <a href="<?php echo BASE_URL?>views/indexAdmin.php">Administadores</a>
+                        <a href="<?php echo BASE_URL?>logout.php">Cerrar Sesión</a>
                 </div>
             </ul>
         </nav>
