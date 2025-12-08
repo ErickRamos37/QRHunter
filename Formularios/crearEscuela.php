@@ -31,8 +31,7 @@
 
         <h2>Registrar Nueva Escuela</h2>
         
-        <form id="escuelaForm" method="POST" action="<?php echo BASE_URL?>GRUD/Crear/insertarEscuela.php">
-
+        <form id="escuelaForm" method="POST" action="../GRUD/Crear/insertarEscuela.php">
             <label for="nombre">Nombre de la Escuela:</label>
             <input type="text" id="nombre" name="nombre" required>
 
