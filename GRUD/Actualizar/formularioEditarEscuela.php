@@ -4,9 +4,11 @@
 <?php
     // --- INCLUSIONES CORREGIDAS (SOLO SUBE UN NIVEL ../) ---
     // [1] Solución al error de ruta en la inclusión de config.php
+    session_start();
     require_once("../config/config.php"); 
     require_once(RUTA_RAIZ."/config/conexion.php"); 
     require_once(RUTA_RAIZ."/views/header.php");
+    require_once(RUTA_RAIZ."/config/verificar_sesion.php");
     $conn = conectarBD();
 
     // LÓGICA AGREGADA: Obtener la lista de ciudades válidas para el SELECT

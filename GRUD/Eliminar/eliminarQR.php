@@ -2,12 +2,13 @@
 require_once("../../config/config.php");
 require_once(RUTA_RAIZ."/config/conexion.php");
 
-$conn = conectarBD();
-?>
-
-<?php
+if (!isset($_GET["id_qr"])) {
+    header("Location: ../../views/qr.php");
+    exit();
+}
 
 $id_qr = $_GET["id_qr"];
+$conn = conectarBD();
 
 $sql = "DELETE FROM qr WHERE id_qr = ?";
 
@@ -19,8 +20,10 @@ try {
     exit();
 
 } catch (PDOException $e) {
-    echo "<h1>No se pudo eliminar</h1>";
-    echo "<p>Error: " . $e->getMessage() . "</p>";
-    echo "<a href='../../views/qr.php'>Volver</a>";
+
+
+    $error = urlencode($e->getMessage());
+    header("Location: ../manejoDeErrores.php?mensaje=" . $error);
+    exit();
 }
 ?>
