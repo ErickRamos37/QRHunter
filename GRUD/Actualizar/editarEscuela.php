@@ -27,7 +27,7 @@ try {
     ]);
 
     // Redirección CORREGIDA: Usando BASE_URL para volver al listado
-    if ($sentencia->rowCount() > 0) {
+   if ($sentencia->rowCount() > 0) {
         // Redirige al listado con un mensaje de éxito
         header("Location:".$BASE_URL."GRUD/Leer/escuelas.php?actualizado=true");
         exit();

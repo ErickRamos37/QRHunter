@@ -23,7 +23,7 @@ try {
 
     // Redirección exitosa: Usando BASE_URL para volver al listado de escuelas 
     // y pasar un parámetro de confirmación.
-    header("location:".$BASE_URL."GRUD/Leer/escuelas.php?insertado=true");
+ header("Location:".$BASE_URL."GRUD/Leer/escuelas.php?insertado=true");
     exit();
     
 } catch (PDOException $e) {
