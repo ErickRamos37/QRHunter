@@ -1,16 +1,16 @@
-// GRUD/editarEscuela.php
 <?php
-include_once("../config/conexion.php");
+// La inclusión requiere subir dos niveles (../../) para llegar a la raíz (QRHunter/)
+require_once("../../config/config.php");
+require_once(RUTA_RAIZ."/config/conexion.php"); 
+require_once(RUTA_RAIZ."/views/header.php");
 $conn = conectarBD();
-<?php
-    require_once("../../config/config.php");
-    require_once(RUTA_RAIZ."/config/conexion.php"); 
-    require_once(RUTA_RAIZ."/views/header.php");
-    $conn = conectarBD();
-?>
 
+// OBTENER DATOS DE POST
+$id_escuela = $_POST["id_escuela"];
+$nombre = $_POST["nombre"];
+$idciudad = $_POST["idciudad"];
 
-// Sentencia UPDATE: Solo actualizamos nombre e idciudad
+// Sentencia UPDATE
 $sql = "UPDATE escuelas SET
     nombre = ?,
     idciudad = ?
@@ -26,12 +26,14 @@ try {
         $id_escuela  
     ]);
 
-    // Redirecciona al listado con un mensaje de éxito/no cambios
+    // Redirección CORREGIDA: Usando BASE_URL para volver al listado
     if ($sentencia->rowCount() > 0) {
-        header("Location:../views/escuelas.php?actualizado=true");
+        // Redirige al listado con un mensaje de éxito
+        header("Location:".$BASE_URL."GRUD/Leer/escuelas.php?actualizado=true");
         exit();
     } else {
-        header("Location:../views/escuelas.php?aviso=no_cambios");
+        // Redirige al listado si no hubo cambios
+        header("Location:".$BASE_URL."GRUD/Leer/escuelas.php?aviso=no_cambios");
         exit();
     }
 } catch (PDOException $e) {
@@ -40,3 +42,4 @@ try {
     echo "<h2>Detalles Técnicos:</h2>";
     echo "<p>" . $e->getMessage() . "</p>";
 }
+?>

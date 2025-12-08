@@ -2,10 +2,39 @@
 <html lang="es">
 
 <?php
-    require_once("../../config/config.php");
+    // --- INCLUSIONES CORREGIDAS (SOLO SUBE UN NIVEL ../) ---
+    // [1] Solución al error de ruta en la inclusión de config.php
+    require_once("../config/config.php"); 
     require_once(RUTA_RAIZ."/config/conexion.php"); 
     require_once(RUTA_RAIZ."/views/header.php");
     $conn = conectarBD();
+
+    // LÓGICA AGREGADA: Obtener la lista de ciudades válidas para el SELECT
+    try {
+        $sql_ciudades = $conn->query("SELECT id_ciudad, nombre FROM ciudades ORDER BY nombre");
+        $ciudades = $sql_ciudades->fetchAll(PDO::FETCH_ASSOC);
+    } catch (Exception $e) {
+        // Manejo de error
+        echo "<p style='color:red; text-align:center;'>Error al cargar ciudades: " . $e->getMessage() . "</p>";
+        $ciudades = [];
+    }
+
+    // Lógica para obtener los datos de la escuela a editar
+    if (!isset($_REQUEST["id_escuela"])) {
+        header("Location:".$BASE_URL."GRUD/Leer/escuelas.php?error=no_id");
+        exit;
+    }
+
+    $sql = "SELECT id_escuela, nombre, idciudad FROM escuelas WHERE id_escuela = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([$_REQUEST["id_escuela"]]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$row) {
+        // Si no se encuentra la escuela, redirigir
+        header("Location:".$BASE_URL."GRUD/Leer/escuelas.php?error=escuela_no_encontrada");
+        exit;
+    }
 ?>
 
 <head>
@@ -18,34 +47,35 @@
 <body>
     <div class="container">
         <h2>Editar Escuela</h2>
-        <form action="../GRUD/editarEscuela.php" method="POST">
-            <?php
-            // Sentencia SELECT para obtener la escuela a editar
-            $sql = "SELECT id_escuela, nombre, idciudad FROM escuelas WHERE id_escuela = ?";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute([$_REQUEST["id_escuela"]]);
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            if (!$row) {
-                echo "<p>Escuela no encontrada.</p>";
-                exit;
-            }
-            ?>
+        
+        <form action="<?php echo BASE_URL?>GRUD/Actualizar/editarEscuela.php" method="POST">
+            
 
             <input type="Hidden" name="id_escuela" required value="<?php echo htmlspecialchars($row['id_escuela']); ?>">
 
             <label for="nombre">Nombre de la Escuela:</label>
             <input type="text" id="nombre" name="nombre" required value="<?php echo htmlspecialchars($row['nombre']); ?>">
 
-            <label for="idciudad">ID de la Ciudad:</label>
-            <input type="number" id="idciudad" name="idciudad" required min="1" value="<?php echo htmlspecialchars($row['idciudad']); ?>">
-
-            <button type="submit">Guardar Cambios</button>
-            <a href="../views/escuelas.php">
-                <button type="button">Cancelar</button>
+            <label for="idciudad">Ciudad:</label>
+            <select id="idciudad" name="idciudad" required>
+                <?php if (empty($ciudades)): ?>
+                    <option value="" disabled>— No hay ciudades disponibles —</option>
+                <?php else: 
+                    foreach ($ciudades as $ciudad): ?>
+                        <option value="<?php echo htmlspecialchars($ciudad['id_ciudad']); ?>"
+                            <?php echo ($ciudad['id_ciudad'] == $row['idciudad']) ? 'selected' : ''; ?>>
+                            <?php echo htmlspecialchars($ciudad['nombre']); ?>
+                        </option>
+                    <?php endforeach;
+                endif; ?>
+            </select>
+            
+            <button type="submit" class="buttonNormal">Guardar Cambios</button>
+            
+            <a href="<?php echo BASE_URL?>GRUD/Leer/escuelas.php">
+                <button type="button" class="buttonEliminar">Cancelar</button>
             </a>
         </form>
     </div>
 </body>
-
 </html>
