@@ -48,9 +48,9 @@
                             <td><?php echo htmlspecialchars($escuela["idciudad"]) ?></td>
                             <td><?php echo htmlspecialchars($escuela["fecha_registro"]) ?></td>
                             <td>
-                                <a href="../Formularios/formularioEditarEscuela.php?id_escuela=<?php echo $escuela["id_escuela"] ?>"><button class="buttonEditar">Editar</button></a>
+                               <a href="<?php echo BASE_URL?>GRUD/Actualizar/formularioEditarEscuela.php?id_escuela=<?php echo $escuela["id_escuela"] ?>"><button class="buttonEditar">Editar</button></a>
                                 
-                               <a href="<?php echo BASE_URL?>GRUD/Eliminar/eliminarEscuela.php?id_escuela=<?php echo $escuela['id_escuela'] ?>"
+                               <a href="<?php echo BASE_URL?>GRUD/Actualizar/formularioEditarEscuela.php?id_escuela=<?php echo $escuela['id_escuela'] ?>"
                                     onclick="return confirm('¿Estás seguro de que quieres eliminar esta escuela?');"><button class="buttonEliminar">Eliminar</button></a>
                             </td>
                         </tr>
