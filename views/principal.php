@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Verificar que el admin haya iniciado sesi�n
+// Verificar que el admin haya iniciado sesion
 if (!isset($_SESSION['admin'])) {
     header("Location: ../loginAdmin.php");
     exit();
@@ -10,6 +10,7 @@ if (!isset($_SESSION['admin'])) {
     require_once("../config/config.php");
     require_once(RUTA_RAIZ."/config/conexion.php"); 
     require_once(RUTA_RAIZ."/views/header.php");
+    require_once(RUTA_RAIZ."/config/verificar_sesion.php");
     $conn = conectarBD();
 
 // Incluir header con navbar
@@ -30,7 +31,7 @@ if (!isset($_SESSION['admin'])) {
     </div>
 
     <script>
-        // L�gica para el Cierre de Sesi�n usando PHP
+        // Logica para el Cierre de Sesion usando PHP
         const logoutBtn = document.querySelector('nav a[href="../logout.php"], nav a[href="#"]');
 
         if(logoutBtn){
