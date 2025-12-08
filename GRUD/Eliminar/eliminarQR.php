@@ -21,6 +21,6 @@ try {
 } catch (PDOException $e) {
     echo "<h1>No se pudo eliminar</h1>";
     echo "<p>Error: " . $e->getMessage() . "</p>";
-    echo "<a href='../views/qr.php'>Volver</a>";
+    echo "<a href='../../views/qr.php'>Volver</a>";
 }
 ?>
