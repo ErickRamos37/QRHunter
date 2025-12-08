@@ -26,7 +26,7 @@ try {
     
     // Redirige al listado: Usando BASE_URL para volver al listado de escuelas 
     // y pasar un parámetro de confirmación.
-    header("Location:".$BASE_URL."GRUD/Leer/escuelas.php?eliminado=true");
+   header("Location:".$BASE_URL."GRUD/Leer/escuelas.php?eliminado=true");
     exit();
     
 } catch (PDOException $e) {
