@@ -10,7 +10,7 @@ $conn = conectarBD();
 // Recibe los datos del formulario (crearEscuela.php)
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     // Si no es POST, redirige con error (o simplemente al listado)
-    header("location:".$BASE_URL."GRUD/Leer/escuelas.php?error=metodo_no_valido");
+    header("location: " . BASE_URL . "GRUD/Leer/escuelas.php?error=metodo_no_valido");
     exit();
 }
 
@@ -19,7 +19,7 @@ $nombre = $_POST["nombre"] ?? null;
 $idciudad = $_POST["idciudad"] ?? null;
 
 if (empty($nombre) || empty($idciudad)) {
-    header("location:".$BASE_URL."GRUD/Leer/escuelas.php?error=datos_faltantes");
+    header("location: " . BASE_URL . "GRUD/Leer/escuelas.php?error=datos_faltantes");
     exit();
 }
 
@@ -34,16 +34,13 @@ try {
     $sentencia->execute([$nombre, $idciudad]);
 
     // Redirección exitosa: Usando BASE_URL para volver al listado de escuelas
-    header("location:".$BASE_URL."GRUD/Leer/escuelas.php?insertado=true");
+    header("location: " . BASE_URL . "GRUD/Leer/escuelas.php?insertado=true");
     exit();
     
 } catch (PDOException $e) {
-    // Si falla la inserción (ej: clave foránea idciudad no existe)
-    // Se puede mostrar el error o redirigir con un mensaje de fallo.
+    // Si falla la inserción (ej: clave foránea inválida o duplicado)
     echo "<h1>Error al insertar la escuela</h1>";
     echo "<h2>Detalles Técnicos:</h2>";
     echo "<p>" . $e->getMessage() . "</p>";
-    // O podrías redirigir: header("location:".$BASE_URL."GRUD/Leer/escuelas.php?error=fallo_db"); exit();
 }
-
 ?>
