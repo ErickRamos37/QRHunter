@@ -15,7 +15,7 @@
 <body>
 
 <?php 
-
+    // Capturamos el mensaje de error de la URL
     $mensaje_error = isset($_GET['mensaje']) ? $_GET['mensaje'] : "Ocurrió un error inesperado. Por favor intenta de nuevo.";
 ?>
 
