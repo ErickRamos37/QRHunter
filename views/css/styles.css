@@ -292,3 +292,27 @@ input, select, textarea {
 .dataTables_wrapper .dataTables_filter {
     margin-bottom: 15px;
 }
+
+/* Ventana editar admin */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+    background: white;
+    margin: 10% auto;
+    padding: 20px;
+    width: 350px;
+    border-radius: 8px;
+}
+
+.cerrar {
+    float: right;
+    font-size: 22px;
+    cursor: pointer;
+}

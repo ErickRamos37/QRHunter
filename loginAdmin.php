@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <p class="error-msg"><?php echo $error; ?></p>
             <?php endif; ?>
 
-            <button type="submit" class="btn-guardar btn-login-margin">Ingresar</button>
+            <button type="submit" class="buttonNormal btn-login-margin">Ingresar</button>
         </form>
         
     </div>
