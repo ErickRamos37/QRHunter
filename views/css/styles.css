@@ -162,10 +162,6 @@ input, textarea, select {
 }
 
 .boton-enlace {
-  background-color: #0e6021 !important; 
-  color: white !important;             
-  padding: 10px !important;           
-  border: none !important;    
   background-color: #0e6021 !important; /* Forzar el color de fondo */
   color: white !important;             /* Forzar el color del texto */
   padding: 10px !important;            /* Forzar el relleno */
