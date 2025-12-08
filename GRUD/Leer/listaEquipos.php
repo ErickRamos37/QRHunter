@@ -14,6 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Hunter - Equipos</title>
     <link rel="stylesheet" href="<?php echo RUTA_CSS?>styles.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 </head>
 
 <body>
@@ -22,7 +23,7 @@
 
         <h2>Lista de Equipos Registrados</h2>
         <a href="<?php echo BASE_URL?>GRUD/Crear/crearEquipo.php"><button class="buttonNormal">+ Agregar Nuevo Equipo</button></a>
-        <table id="tablaEquipos">
+        <table id="tablaEquipos" class="display" style="width:100%">
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -40,8 +41,7 @@
                         FROM Equipos eq
                         INNER JOIN escuelas es ON eq.escuela_id = es.id_escuela 
                         INNER JOIN dispositivos dis ON eq.id_disp = dis.id_dispositivo
-                        ORDER BY eq.id_equipo DESC
-                        LIMIT 20");
+                        ORDER BY eq.id_equipo DESC");
 
                 while ($equipos = $sql->fetch()) {
                 ?>
@@ -71,6 +71,31 @@
         </table>
         
     </div>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#tablaEquipos').DataTable({
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros",
+                    "zeroRecords": "No se encontraron resultados",
+                    "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
+                    "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0",
+                    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sSearch": "Buscar:",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "sProcessing": "Procesando..."
+                },
+                "pageLength": 10, // Mostrar 10 por defecto
+                "ordering": true  // Permitir ordenar por columnas
+            });
+        });
+    </script>
 </body>
 
 </html>
