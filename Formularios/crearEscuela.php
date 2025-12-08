@@ -3,7 +3,7 @@
 
 <?php
     // --- INCLUSIONES ---
-    // La ruta aquí se asume la correcta: '../config/config.php'
+    // La ruta de inclusión se corrige a un nivel (../)
     require_once("../config/config.php"); 
     require_once(RUTA_RAIZ."/config/conexion.php"); 
     require_once(RUTA_RAIZ."/views/header.php");
@@ -53,7 +53,7 @@
             <button class="buttonNormal" type="submit">Guardar Escuela</button>
         </form>
         
-        <a href="<?php echo BASE_URL?>views/escuelas.php"><button id="buttonCentral" class="buttonEliminar" type="button">Cancelar</button></a>
+        <a href="<?php echo BASE_URL?>GRUD/Leer/escuelas.php"><button id="buttonCentral" class="buttonEliminar" type="button">Cancelar</button></a>
     </div>
 </body>
 </html>
