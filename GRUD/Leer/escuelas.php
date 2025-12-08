@@ -2,18 +2,18 @@
 <html lang="es">
 
 <?php
-    // Estas líneas son las que establecen la conexión y definen las rutas
-    require_once("../../config/config.php");
+    // Bloque de inclusión solicitado (3 niveles arriba)
+    require_once("../../../config/config.php"); 
     require_once(RUTA_RAIZ."/config/conexion.php"); 
     require_once(RUTA_RAIZ."/views/header.php");
-    $conn = conectarBD(); // Asume que esta función retorna un objeto PDO conectado
+    $conn = conectarBD(); 
 ?>
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Hunter - Escuelas</title>
-    <link rel="stylesheet" href="<?php echo RUTA_CSS?>styles.css"> 
+    <link rel="stylesheet" href="<?php echo RUTA_CSS?>styles.css">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
 </head>
@@ -22,7 +22,7 @@
 
         <h2>Lista de Escuelas Registradas</h2>
         
-        <a href="../Formularios/crearescuela.php"><button class="buttonNormal">➕ Agregar Nueva Escuela</button></a>
+        <a href="../../Formularios/crearescuela.php"><button class="buttonNormal">➕ Agregar Nueva Escuela</button></a>
         
 
         <table id="tablaEscuelas" class="display"> 
@@ -38,10 +38,8 @@
             <tbody>
                 <?php
                 try {
-                    // Consulta SQL para obtener escuelas reales.
                     $sql = $conn->query("SELECT id_escuela, nombre, idciudad, fecha_registro FROM escuelas ORDER BY id_escuela DESC"); 
 
-                    // Bucle para ITERAR sobre los resultados REALES de la base de datos
                     while ($escuela = $sql->fetch(PDO::FETCH_ASSOC)) {
                     ?>
                         <tr>
@@ -50,8 +48,9 @@
                             <td><?php echo htmlspecialchars($escuela["idciudad"]) ?></td>
                             <td><?php echo htmlspecialchars($escuela["fecha_registro"]) ?></td>
                             <td>
-                                <a href="../Formularios/formularioEditarEscuela.php?id_escuela=<?php echo $escuela["id_escuela"] ?>"><button class="buttonEditar">Editar</button></a>
-                                <a href="../GRUD/eliminarEscuela.php?id_escuela=<?php echo $escuela['id_escuela'] ?>" 
+                                <a href="../../Formularios/formularioEditarEscuela.php?id_escuela=<?php echo $escuela["id_escuela"] ?>"><button class="buttonEditar">Editar</button></a>
+                                
+                                <a href="../Eliminar/eliminarEscuela.php?id_escuela=<?php echo $escuela['id_escuela'] ?>" 
                                     onclick="return confirm('¿Estás seguro de que quieres eliminar esta escuela?');"><button class="buttonEliminar">Eliminar</button></a>
                             </td>
                         </tr>
