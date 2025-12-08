@@ -2,8 +2,8 @@
 <html lang="es">
 
 <?php
-    // Bloque de inclusión solicitado (2 niveles arriba)
-    require_once("../../config/config.php");
+    // RUTA CORREGIDA: Ahora solo es un nivel (../)
+    require_once("../config/config.php");
     require_once(RUTA_RAIZ."/config/conexion.php"); 
     require_once(RUTA_RAIZ."/views/header.php");
     $conn = conectarBD();
@@ -19,7 +19,7 @@
     <div class="container">
 
         <h2>Registrar Nueva Escuela</h2>
-        <form id="escuelaForm" method="POST" action="../GRUD/Crear/insertarEscuela.php">
+        <form id="escuelaForm" method="POST" action="<?php echo BASE_URL?>GRUD/insertarEscuela.php">
 
             <label for="nombre">Nombre de la Escuela:</label>
             <input type="text" id="nombre" name="nombre" required>
@@ -29,7 +29,8 @@
 
             <button class="buttonNormal" type="submit">Guardar Escuela</button>
         </form>
-        <a href="../GRUD/Leer/escuelas.php"><button id="buttonCentral" class="buttonEliminar" type="button">Cancelar</button></a>
+        
+        <a href="<?php echo BASE_URL?>views/escuelas.php"><button id="buttonCentral" class="buttonEliminar" type="button">Cancelar</button></a>
     </div>
 </body>
 </html>
