@@ -3,9 +3,13 @@
 
 <?php
     // Rutas originales antes de la corrección a ../../
+    session_start();
     require_once("../../config/config.php"); 
     require_once(RUTA_RAIZ."/config/conexion.php"); 
     require_once(RUTA_RAIZ."/views/header.php");
+    require_once(RUTA_RAIZ."/config/verificar_sesion.php");
+
+
     $conn = conectarBD(); 
 ?>
 
@@ -15,16 +19,43 @@
     <title>QR Hunter - Escuelas</title>
     <link rel="stylesheet" href="<?php echo RUTA_CSS?>styles.css"> 
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    
+    <style>
+        /* Apuntamos al div que contiene el Mostrar X y Buscar */
+        #tablaEscuelas_wrapper > div:first-child { 
+            display: flex !important;
+            justify-content: space-between !important; 
+            align-items: center !important; /* CAMBIO CLAVE: Alinea los ítems verticalmente al centro */
+            margin-bottom: 15px;
+        }
+
+        /* Asegurar que los elementos de DataTables respeten la distribución */
+        #tablaEscuelas_wrapper .dataTables_length,
+        #tablaEscuelas_wrapper .dataTables_filter {
+            float: none !important; 
+            /* Se asegura que no haya margen inferior extra en el filtro */
+            margin-bottom: 0 !important; 
+        }
+
+        #tablaEscuelas_wrapper .dataTables_length {
+            text-align: left !important;
+        }
+
+        #tablaEscuelas_wrapper .dataTables_filter {
+            text-align: right !important;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
 
         <h2>Lista de Escuelas Registradas</h2>
         
-<a href="<?php echo BASE_URL?>Formularios/crearEscuela.php"><button class="buttonNormal"> Agregar Nueva Escuela</button></a>
+        <div class="header-acciones" style="justify-content: flex-start; margin-bottom: 20px;">
+            <a href="<?php echo BASE_URL?>Formularios/crearEscuela.php"><button class="buttonNormal"> Agregar Nueva Escuela</button></a>
+        </div>
         
-
         <table id="tablaEscuelas" class="display"> 
             <thead>
                 <tr>
@@ -47,13 +78,17 @@
                             <td><?php echo htmlspecialchars($escuela["nombre"]) ?></td>
                             <td><?php echo htmlspecialchars($escuela["idciudad"]) ?></td>
                             <td><?php echo htmlspecialchars($escuela["fecha_registro"]) ?></td>
-                          <td>
-                                <a href="<?php echo BASE_URL?>GRUD/Actualizar/formularioEditarEscuela.php?id_escuela=<?php echo $escuela["id_escuela"] ?>"><button class="buttonEditar">Editar</button></a>
+                            
+                            <td style="display: flex; justify-content: center; gap: 10px;">
+                                <a href="<?php echo BASE_URL?>GRUD/Actualizar/formularioEditarEscuela.php?id_escuela=<?php echo $escuela["id_escuela"] ?>">
+                                    <button class="buttonEditar">Editar</button>
+                                </a>
                                 
                                 <a href="<?php echo BASE_URL?>GRUD/Eliminar/eliminarEscuela.php?id_escuela=<?php echo $escuela['id_escuela'] ?>"
-                                    onclick="return confirm('¿Estás seguro de que quieres eliminar esta escuela?');"><button class="buttonEliminar">Eliminar</button></a>
+                                    onclick="return confirm('¿Estás seguro de que quieres eliminar esta escuela?');">
+                                    <button class="buttonEliminar">Eliminar</button>
+                                </a>
                             </td>
-                        </tr>
                         </tr>
                     <?php
                     }
@@ -65,18 +100,29 @@
         </table>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
     <script>
         $(document).ready(function() {
             $('#tablaEscuelas').DataTable({
                 "language": {
-                    "url": "https://cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+                    "lengthMenu": "Mostrar _MENU_ registros",
+                    "zeroRecords": "No se encontraron resultados",
+                    "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
+                    "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0",
+                    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sSearch": "Buscar:",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "sProcessing": "Procesando..."
                 },
-                "paging": true,     
-                "ordering": true,   
-                "info": true,       
+                "pageLength": 10,
+                "ordering": true,
                 "searching": true   
             });
         });
