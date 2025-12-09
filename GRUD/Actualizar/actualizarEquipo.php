@@ -10,6 +10,7 @@ $escuela_id = $_POST["escuela"];
 $id_disp = $_POST["dispositivo"];
 $esp32id = $_POST["DisID"];
 $fin = $_POST["fin"];
+$id_avatar = $_POST["avatar"];
 
 try {
 $sql_previo = "SELECT id_disp FROM Equipos WHERE id_equipo = ?";
@@ -36,11 +37,12 @@ if (!$ronda_finalizada && ($id_disp_anterior != $id_disp)) {
     }
 
 
-$sql = "update Equipos set
+$sql = "UPDATE Equipos SET
     nombre = ?,
     escuela_id = ?,
     id_disp = ?,
-    esp32id = ?
+    esp32id = ?,
+    id_avatar = ?
 WHERE 
     id_equipo = ?";
 
@@ -51,6 +53,7 @@ WHERE
         $escuela_id,
         $id_disp,
         $esp32id,
+        $id_avatar,
         $id_equipo  
     ]);
 
@@ -62,10 +65,7 @@ WHERE
         exit();
     }
 } catch (PDOException $e) {
-    // Fracaso: Manejar el error
-    echo "<h1>Error al actualizar los datos</h1>";
-    echo "<h2>Detalles Técnicos:</h2>";
-    echo "<p>" . $e->getMessage() . "</p>";
+    $error = urlencode($e->getMessage());
     header("Location:".BASE_URL."GRUD/manejoDeErrores.php");
     exit();
 }

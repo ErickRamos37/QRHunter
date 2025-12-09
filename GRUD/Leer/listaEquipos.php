@@ -23,9 +23,10 @@
 
         <h2>Lista de Equipos Registrados</h2>
         <a href="<?php echo BASE_URL?>GRUD/Crear/crearEquipo.php"><button class="buttonNormal">+ Agregar Nuevo Equipo</button></a>
-        <table id="tablaEquipos" class="display" style="width:100%">
+        <table id="tablaEquipos" class="display">
             <thead>
                 <tr>
+                    <th>Avatar</th>
                     <th>Nombre</th>
                     <th>Escuela</th>
                     <th>Dispositivo</th>
@@ -37,15 +38,18 @@
                 $sql = $conn->query("SELECT
                         eq.id_disp, eq.id_equipo, eq.nombre AS Nombre, eq.fin,
                         es.nombre AS Escuela,
-                        dis.id_dispositivo AS Dispositivo
+                        dis.id_dispositivo AS Dispositivo,
+                        av.id_avatar, av.nombre AS Avatar
                         FROM Equipos eq
                         INNER JOIN escuelas es ON eq.escuela_id = es.id_escuela 
                         INNER JOIN dispositivos dis ON eq.id_disp = dis.id_dispositivo
-                        ORDER BY eq.id_equipo DESC");
+                        INNER JOIN avatars av ON eq.id_avatar = av.id_avatar
+                        ");
 
                 while ($equipos = $sql->fetch()) {
                 ?>
                     <tr>
+                        <td><?php echo $equipos["Avatar"] ?></td>
                         <td><?php echo $equipos["Nombre"] ?></td>
                         <td><?php echo $equipos["Escuela"] ?></td>
                         <td><?php echo $equipos["Dispositivo"] ?></td>
@@ -61,7 +65,7 @@
                             }
                             ?>
 
-                            <a href="<?php echo BASE_URL?>GRUD/Eliminar/eliminarEquipo.php?id_equipo=<?php echo $equipos['id_equipo'] ?>" onclick="return confirm('¿Estás seguro de eliminar este equipo?');"><button class="buttonEliminar">Eliminar</button></a>
+                            <a href="<?php echo BASE_URL?>GRUD/Eliminar/eliminarEquipo.php?id_equipo=<?php echo $equipos['id_equipo']?>&id_disp=<?php echo $equipos['id_disp']?>" onclick="return confirm('¿Estás seguro de eliminar este equipo?');"><button class="buttonEliminar">Eliminar</button></a>
                         </td>
                     </tr>
                 <?php

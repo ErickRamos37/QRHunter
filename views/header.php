@@ -23,6 +23,7 @@
                 <li><a href="<?php echo BASE_URL?>views/ciudades.php">Ciudades</a></li>
                 <li><a href="<?php echo BASE_URL?>views/dispositivos.php">Dispositivos</a></li>
                 <li><a href="<?php echo BASE_URL?>views/qr.php">QR</a></li>
+                <li><a href="<?php echo BASE_URL?>GRUD/Leer/listaAvatars.php">Avatars</a></li>
 
                 <div class="dropdown">
                     <button class="dropbtn"><?php echo $_SESSION['admin']?>▼</button>

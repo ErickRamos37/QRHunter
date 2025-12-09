@@ -18,17 +18,21 @@
 
 <body>
     <div class="container">
-        <h2>Editar Producto</h2>
+        <h2>Editar Equipo</h2>
         <form action="<?php echo BASE_URL?>GRUD/Actualizar/actualizarEquipo.php" method="POST">
             <?php
-            $sql = "SELECT eq.id_equipo, eq.nombre AS Nombre, es.id_escuela, es.nombre AS Escuela, dis.id_dispositivo AS Dispositivo, eq.esp32id AS ClaveDisp 
+            $sql = "SELECT eq.id_equipo, eq.nombre AS Nombre, eq.esp32id AS ClaveDisp,
+            es.id_escuela, es.nombre AS Escuela, 
+            dis.id_dispositivo AS Dispositivo, 
+            av.id_avatar, av.nombre
         FROM Equipos eq
         INNER JOIN escuelas es ON eq.escuela_id = es.id_escuela 
-        INNER JOIN dispositivos dis ON eq.id_disp = dis.id_dispositivo 
+        INNER JOIN dispositivos dis ON eq.id_disp = dis.id_dispositivo
+        INNER JOIN avatars av ON eq.id_avatar = av.id_avatar
         WHERE eq.id_equipo = ?";
             $stmt = $conn->prepare($sql);
             $stmt->execute([$_REQUEST["id_equipo"]]);
-            $row = $stmt->fetch()
+            $row = $stmt->fetch();
             ?>
 
             <input type="Hidden" name="idUser" required value="<?php echo htmlspecialchars($row['id_equipo']); ?>">
@@ -36,13 +40,27 @@
             <label for="nombreEquipo">Nombre del Equipo:</label>
             <input type="text" id="nombreEquipo" name="nombreEquipo" required value="<?php echo htmlspecialchars($row['Nombre']); ?>">
 
+
+
             <label for="avatar">Seleccionar Avatar:</label>
-            <select id="avatar" name="avatar">
-                <option disabled selected>--Elige un avatar--</option>
+            <select id="avatar" name="avatar" required>
+                <option disabled selected>--Elige un Avatar--</option>
+                <?php
+                $avatar_actual_id = isset($row['id_avatar']) ? $row['id_avatar'] : null;
+                $sql_avatar = $conn->query("SELECT av.id_avatar, av.nombre FROM avatars av ORDER BY av.nombre");
+                while ($av = $sql_avatar->fetch(PDO::FETCH_ASSOC)) {
+
+                    // Determina si esta es la opción actualmente seleccionada
+                    $selected = ($av['id_avatar'] == $avatar_actual_id) ? 'selected' : '';  
+
+                    // Imprime la opción
+                    echo "<option value='{$av['id_avatar']}' {$selected}>{$av['nombre']}</option>";
+                }
+                ?>
             </select>
 
             <label for="escuela">Seleccionar Escuela:</label>
-            <select id="escuela" name="escuela">
+            <select id="escuela" name="escuela" required>
                 <option disabled selected>--Elige un Escuela--</option>
                 <?php
                 $escuela_actual_id = isset($row['id_escuela']) ? $row['id_escuela'] : null;
@@ -60,7 +78,7 @@
             </select>
 
             <label for="dispositivo">Dispositivo:</label>
-            <select id="dispositivo" name="dispositivo">
+            <select id="dispositivo" name="dispositivo" required>
                 <option disabled selected>--Elige un Dispositivo--</option>
                 <?php
                 $dispositivo_actual_id = isset($row['Dispositivo']) ? $row['Dispositivo'] : null;
