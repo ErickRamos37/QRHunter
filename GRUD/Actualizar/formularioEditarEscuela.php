@@ -2,39 +2,48 @@
 <html lang="es">
 
 <?php
-    // --- INCLUSIONES CORREGIDAS (SOLO SUBE UN NIVEL ../) ---
-    // [1] Solución al error de ruta en la inclusión de config.php
-    require_once("../config/config.php"); 
-    require_once(RUTA_RAIZ."/config/conexion.php"); 
-    require_once(RUTA_RAIZ."/views/header.php");
-    $conn = conectarBD();
+// La inclusión requiere subir dos niveles (../../) para llegar a la raíz (QRHunter/)
+session_start();
+require_once("../../config/config.php"); 
+require_once(RUTA_RAIZ."/config/conexion.php"); 
+require_once(RUTA_RAIZ."/views/header.php");
+require_once(RUTA_RAIZ."/config/verificar_sesion.php");
 
-    // LÓGICA AGREGADA: Obtener la lista de ciudades válidas para el SELECT
-    try {
-        $sql_ciudades = $conn->query("SELECT id_ciudad, nombre FROM ciudades ORDER BY nombre");
-        $ciudades = $sql_ciudades->fetchAll(PDO::FETCH_ASSOC);
-    } catch (Exception $e) {
-        // Manejo de error
-        echo "<p style='color:red; text-align:center;'>Error al cargar ciudades: " . $e->getMessage() . "</p>";
-        $ciudades = [];
-    }
+$conn = conectarBD();
 
-    // Lógica para obtener los datos de la escuela a editar
-    if (!isset($_REQUEST["id_escuela"])) {
-        header("Location:".$BASE_URL."GRUD/Leer/escuelas.php?error=no_id");
-        exit;
-    }
+// --- 1. OBTENER LA LISTA DE CIUDADES VÁLIDAS ---
+try {
+    $sql_ciudades = $conn->query("SELECT id_ciudad, nombre FROM ciudades ORDER BY nombre");
+    $ciudades = $sql_ciudades->fetchAll(PDO::FETCH_ASSOC);
+} catch (Exception $e) {
+    echo "<p style='color:red; text-align:center;'>Error al cargar ciudades: " . $e->getMessage() . "</p>";
+    $ciudades = [];
+}
 
+// --- 2. LÓGICA PARA OBTENER LOS DATOS DE LA ESCUELA A EDITAR ---
+if (!isset($_REQUEST["id_escuela"]) || !is_numeric($_REQUEST["id_escuela"])) {
+    // Redirige si no hay ID o el ID no es numérico
+    header("Location:". BASE_URL."GRUD/Leer/escuelas.php?error=no_id");
+    exit;
+}
+
+$id_escuela_a_editar = $_REQUEST["id_escuela"];
+
+try {
     $sql = "SELECT id_escuela, nombre, idciudad FROM escuelas WHERE id_escuela = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->execute([$_REQUEST["id_escuela"]]);
+    $stmt->execute([$id_escuela_a_editar]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$row) {
-        // Si no se encuentra la escuela, redirigir
-        header("Location:".$BASE_URL."GRUD/Leer/escuelas.php?error=escuela_no_encontrada");
+        // Redirige si el ID no corresponde a ninguna escuela
+        header("Location:". BASE_URL."GRUD/Leer/escuelas.php?error=escuela_no_encontrada");
         exit;
     }
+} catch (Exception $e) {
+    echo "<p style='color:red; text-align:center;'>Error al cargar la escuela: " . $e->getMessage() . "</p>";
+    $row = false;
+}
 ?>
 
 <head>
@@ -50,8 +59,7 @@
         
         <form action="<?php echo BASE_URL?>GRUD/Actualizar/editarEscuela.php" method="POST">
             
-
-            <input type="Hidden" name="id_escuela" required value="<?php echo htmlspecialchars($row['id_escuela']); ?>">
+            <input type="hidden" name="id_escuela" required value="<?php echo htmlspecialchars($row['id_escuela']); ?>">
 
             <label for="nombre">Nombre de la Escuela:</label>
             <input type="text" id="nombre" name="nombre" required value="<?php echo htmlspecialchars($row['nombre']); ?>">
@@ -59,11 +67,16 @@
             <label for="idciudad">Ciudad:</label>
             <select id="idciudad" name="idciudad" required>
                 <?php if (empty($ciudades)): ?>
-                    <option value="" disabled>— No hay ciudades disponibles —</option>
-                <?php else: 
+                    <option value="" disabled selected>— No hay ciudades disponibles —</option>
+                <?php else: ?>
+                    <option value="" disabled>Selecciona una ciudad</option>
+                    <?php 
+                    // Itera sobre las ciudades para llenar el SELECT
                     foreach ($ciudades as $ciudad): ?>
                         <option value="<?php echo htmlspecialchars($ciudad['id_ciudad']); ?>"
-                            <?php echo ($ciudad['id_ciudad'] == $row['idciudad']) ? 'selected' : ''; ?>>
+                            <?php 
+                            // Marca como 'selected' si el ID de la ciudad coincide con el idciudad de la escuela
+                            echo ($ciudad['id_ciudad'] == $row['idciudad']) ? 'selected' : ''; ?>>
                             <?php echo htmlspecialchars($ciudad['nombre']); ?>
                         </option>
                     <?php endforeach;

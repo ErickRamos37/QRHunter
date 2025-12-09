@@ -1,5 +1,6 @@
 <?php
 // La inclusión requiere subir dos niveles (../../) para llegar a la raíz (QRHunter/)
+
 require_once("../../config/config.php");
 require_once(RUTA_RAIZ."/config/conexion.php"); 
 require_once(RUTA_RAIZ."/views/header.php");
@@ -27,15 +28,16 @@ try {
     ]);
 
     // Redirección CORREGIDA: Usando BASE_URL para volver al listado
-    if ($sentencia->rowCount() > 0) {
+ if ($sentencia->rowCount() > 0) {
         // Redirige al listado con un mensaje de éxito
-        header("Location:".$BASE_URL."GRUD/Leer/escuelas.php?actualizado=true");
+        header("Location: " . BASE_URL . "GRUD/Leer/escuelas.php?actualizado=true");
         exit();
     } else {
         // Redirige al listado si no hubo cambios
-        header("Location:".$BASE_URL."GRUD/Leer/escuelas.php?aviso=no_cambios");
+       header("Location: " . BASE_URL . "GRUD/Leer/escuelas.php?aviso=no_cambios");
         exit();
     }
+// ...
 } catch (PDOException $e) {
     // Fracaso: Manejar el error
     echo "<h1>Error al actualizar los datos</h1>";

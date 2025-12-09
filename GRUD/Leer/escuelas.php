@@ -3,9 +3,13 @@
 
 <?php
     // Rutas originales antes de la corrección a ../../
+    session_start();
     require_once("../../config/config.php"); 
     require_once(RUTA_RAIZ."/config/conexion.php"); 
     require_once(RUTA_RAIZ."/views/header.php");
+    require_once(RUTA_RAIZ."/config/verificar_sesion.php");
+
+
     $conn = conectarBD(); 
 ?>
 
@@ -22,7 +26,7 @@
 
         <h2>Lista de Escuelas Registradas</h2>
         
-<a href="<?php echo BASE_URL?>Formularios/crearescuela.php"><button class="buttonNormal"> Agregar Nueva Escuela</button></a>
+<a href="<?php echo BASE_URL?>Formularios/crearEscuela.php"><button class="buttonNormal"> Agregar Nueva Escuela</button></a>
         
 
         <table id="tablaEscuelas" class="display"> 
@@ -47,12 +51,13 @@
                             <td><?php echo htmlspecialchars($escuela["nombre"]) ?></td>
                             <td><?php echo htmlspecialchars($escuela["idciudad"]) ?></td>
                             <td><?php echo htmlspecialchars($escuela["fecha_registro"]) ?></td>
-                            <td>
-                                <a href="../Formularios/formularioEditarEscuela.php?id_escuela=<?php echo $escuela["id_escuela"] ?>"><button class="buttonEditar">Editar</button></a>
+                          <td>
+                                <a href="<?php echo BASE_URL?>GRUD/Actualizar/formularioEditarEscuela.php?id_escuela=<?php echo $escuela["id_escuela"] ?>"><button class="buttonEditar">Editar</button></a>
                                 
-                               <a href="<?php echo BASE_URL?>GRUD/Eliminar/eliminarEscuela.php?id_escuela=<?php echo $escuela['id_escuela'] ?>"
+                                <a href="<?php echo BASE_URL?>GRUD/Eliminar/eliminarEscuela.php?id_escuela=<?php echo $escuela['id_escuela'] ?>"
                                     onclick="return confirm('¿Estás seguro de que quieres eliminar esta escuela?');"><button class="buttonEliminar">Eliminar</button></a>
                             </td>
+                        </tr>
                         </tr>
                     <?php
                     }
