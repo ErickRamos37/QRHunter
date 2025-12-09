@@ -3,6 +3,7 @@
 
 <?php
 // La inclusión requiere subir dos niveles (../../) para llegar a la raíz (QRHunter/)
+<<<<<<< HEAD
 require_once("../../config/config.php"); 
 require_once(RUTA_RAIZ."/config/conexion.php"); 
 require_once(RUTA_RAIZ."/views/header.php");
@@ -24,6 +25,32 @@ if (!isset($_REQUEST["id_escuela"]) || !is_numeric($_REQUEST["id_escuela"])) {
     exit;
 }
 
+=======
+session_start();
+require_once("../../config/config.php"); 
+require_once(RUTA_RAIZ."/config/conexion.php"); 
+require_once(RUTA_RAIZ."/views/header.php");
+require_once(RUTA_RAIZ."/config/verificar_sesion.php");
+
+$conn = conectarBD();
+
+// --- 1. OBTENER LA LISTA DE CIUDADES VÁLIDAS ---
+try {
+    $sql_ciudades = $conn->query("SELECT id_ciudad, nombre FROM ciudades ORDER BY nombre");
+    $ciudades = $sql_ciudades->fetchAll(PDO::FETCH_ASSOC);
+} catch (Exception $e) {
+    echo "<p style='color:red; text-align:center;'>Error al cargar ciudades: " . $e->getMessage() . "</p>";
+    $ciudades = [];
+}
+
+// --- 2. LÓGICA PARA OBTENER LOS DATOS DE LA ESCUELA A EDITAR ---
+if (!isset($_REQUEST["id_escuela"]) || !is_numeric($_REQUEST["id_escuela"])) {
+    // Redirige si no hay ID o el ID no es numérico
+    header("Location:". BASE_URL."GRUD/Leer/escuelas.php?error=no_id");
+    exit;
+}
+
+>>>>>>> 50e17e236b63f8e473c59206caded78eaae6487f
 $id_escuela_a_editar = $_REQUEST["id_escuela"];
 
 try {

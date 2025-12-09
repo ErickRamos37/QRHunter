@@ -52,9 +52,13 @@
 
         <h2>Lista de Escuelas Registradas</h2>
         
+<<<<<<< HEAD
         <div class="header-acciones" style="justify-content: flex-start; margin-bottom: 20px;">
             <a href="<?php echo BASE_URL?>Formularios/crearEscuela.php"><button class="buttonNormal"> Agregar Nueva Escuela</button></a>
         </div>
+=======
+<a href="<?php echo BASE_URL?>Formularios/crearEscuela.php"><button class="buttonNormal"> Agregar Nueva Escuela</button></a>
+>>>>>>> 50e17e236b63f8e473c59206caded78eaae6487f
         
         <table id="tablaEscuelas" class="display"> 
             <thead>
@@ -78,6 +82,7 @@
                             <td><?php echo htmlspecialchars($escuela["nombre"]) ?></td>
                             <td><?php echo htmlspecialchars($escuela["idciudad"]) ?></td>
                             <td><?php echo htmlspecialchars($escuela["fecha_registro"]) ?></td>
+<<<<<<< HEAD
                             
                             <td style="display: flex; justify-content: center; gap: 10px;">
                                 <a href="<?php echo BASE_URL?>GRUD/Actualizar/formularioEditarEscuela.php?id_escuela=<?php echo $escuela["id_escuela"] ?>">
@@ -88,7 +93,15 @@
                                     onclick="return confirm('¿Estás seguro de que quieres eliminar esta escuela?');">
                                     <button class="buttonEliminar">Eliminar</button>
                                 </a>
+=======
+                          <td>
+                                <a href="<?php echo BASE_URL?>GRUD/Actualizar/formularioEditarEscuela.php?id_escuela=<?php echo $escuela["id_escuela"] ?>"><button class="buttonEditar">Editar</button></a>
+                                
+                                <a href="<?php echo BASE_URL?>GRUD/Eliminar/eliminarEscuela.php?id_escuela=<?php echo $escuela['id_escuela'] ?>"
+                                    onclick="return confirm('¿Estás seguro de que quieres eliminar esta escuela?');"><button class="buttonEliminar">Eliminar</button></a>
+>>>>>>> 50e17e236b63f8e473c59206caded78eaae6487f
                             </td>
+                        </tr>
                         </tr>
                     <?php
                     }

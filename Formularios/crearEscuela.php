@@ -4,9 +4,13 @@
 <?php
     // --- INCLUSIONES ---
     // La ruta de inclusión se corrige a un nivel (../)
+    session_start();
     require_once("../config/config.php"); 
     require_once(RUTA_RAIZ."/config/conexion.php"); 
     require_once(RUTA_RAIZ."/views/header.php");
+    require_once(RUTA_RAIZ."/config/verificar_sesion.php");
+
+
     $conn = conectarBD();
 
     // 1. OBTENER LA LISTA DE CIUDADES VÁLIDAS

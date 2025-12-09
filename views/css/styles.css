@@ -123,7 +123,7 @@ input, textarea, select {
   margin-top: 20px;
 }
 
-/*Hovers de los botones*/
+/* Hovers de los botones */
 .buttonNormal:hover {
   background-color: #0b4c19;
 }

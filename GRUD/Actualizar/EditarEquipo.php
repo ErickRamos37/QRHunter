@@ -21,10 +21,11 @@
         <h2>Editar Producto</h2>
         <form action="<?php echo BASE_URL?>GRUD/Actualizar/actualizarEquipo.php" method="POST">
             <?php
-            $sql =
-                "Select eq.id_equipo, eq.nombre as Nombre, es.id_escuela, es.nombre as Escuela, dis.id_dispositivo as Dispositivo, eq.esp32id as ClaveDisp 
-                from Equipos eq, escuelas es, dispositivos dis 
-                where eq.id_equipo = ?";
+            $sql = "SELECT eq.id_equipo, eq.nombre AS Nombre, es.id_escuela, es.nombre AS Escuela, dis.id_dispositivo AS Dispositivo, eq.esp32id AS ClaveDisp 
+        FROM Equipos eq
+        INNER JOIN escuelas es ON eq.escuela_id = es.id_escuela 
+        INNER JOIN dispositivos dis ON eq.id_disp = dis.id_dispositivo 
+        WHERE eq.id_equipo = ?";
             $stmt = $conn->prepare($sql);
             $stmt->execute([$_REQUEST["id_equipo"]]);
             $row = $stmt->fetch()
@@ -63,17 +64,17 @@
                 <option disabled selected>--Elige un Dispositivo--</option>
                 <?php
                 $dispositivo_actual_id = isset($row['Dispositivo']) ? $row['Dispositivo'] : null;
-
-                // Consulta para obtener TODOS los dispositivos (ID y nombre, si lo hay)
-                $sql_dispositivos = $conn->query("SELECT dis.id_dispositivo as Dispositivo FROM dispositivos dis ORDER BY id_dispositivo");
+                $sql_dispositivos = $conn->query("SELECT id_dispositivo, descripcion FROM dispositivos WHERE idEstado = 1 OR id_dispositivo = '{$dispositivo_actual_id}' ORDER BY descripcion ASC");
 
                 while ($disp = $sql_dispositivos->fetch(PDO::FETCH_ASSOC)) {
 
-                    // Determina si esta opción debe estar seleccionada
-                    $selected = ($disp['Dispositivo'] == $dispositivo_actual_id) ? 'selected' : '';
+                    // Determina si esta opción dexbe estar seleccionada
+                    $seleccionado = ($disp['id_dispositivo'] == $dispositivo_actual_id) ? 'selected' : '';
 
                     // El valor (value) y el texto visible son el mismo ID (id_dispositivo)
-                    echo "<option value='{$disp['Dispositivo']}' {$selected}>{$disp['Dispositivo']}</option>";
+                    echo "<option value='{$disp['id_dispositivo']}' {$seleccionado}>";
+                    echo htmlspecialchars($disp['id_dispositivo']); // Usamos la descripción del dispositivo
+                    echo "</option>";
                 }
                 ?>
             </select>
