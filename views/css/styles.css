@@ -123,7 +123,7 @@ input, textarea, select {
   margin-top: 20px;
 }
 
-/*Hovers de los botones*/
+/* Hovers de los botones */
 .buttonNormal:hover {
   background-color: #0b4c19;
 }
@@ -245,28 +245,24 @@ input, select, textarea {
     margin-top: 10px;
     font-weight: bold;
 }
-/* ==================================================== */
-/* ----------- Estilos para DataTables (Buscador/Paginación) ----------- */
-/* ==================================================== */
 
-/* Contenedor principal de DataTables para centrar el contenido */
+
+
 .dataTables_wrapper {
     padding-top: 20px;
     padding-bottom: 20px;
-    /* Asegura que el contenido (buscador, paginación) se centre mejor si el contenedor 'container' es grande */
-}
+  }
 
 /* Contenedor del buscador (input de filtro) */
 .dataTables_filter {
-    text-align: right; /* Alineación del buscador a la derecha */
+    text-align: right; 
     margin-bottom: 15px;
 }
 
-/* Estilo del campo de búsqueda (input) */
 .dataTables_filter input {
-    width: 200px; /* Reducir el ancho para que no ocupe todo */
+    width: 200px; 
     padding: 8px 12px;
-    border: 1px solid #0e6021; /* Borde con tu color principal */
+    border: 1px solid #0e6021; 
     border-radius: 8px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     transition: border-color 0.3s ease;
@@ -277,7 +273,6 @@ input, select, textarea {
     outline: none;
 }
 
-/* Estilo para el área de paginación y la información "Mostrando X de Y" */
 .dataTables_info, .dataTables_paginate {
     padding-top: 15px;
     padding-bottom: 15px;
@@ -424,17 +419,59 @@ input, select, textarea {
     font-size: 1.6rem;   
 }
 
-/* Fecha/Tiempo */
+
 .fecha-escaneo {
     color: #555; 
     font-size: 1.2rem;
     font-weight: 500;
 }
 
-/* Título Principal */
+
 .ranking-container h1 {
     font-size: 2.5rem;
     margin-bottom: 10px;
     text-transform: uppercase;
     letter-spacing: 2px;
+}
+
+.container-error {
+    text-align: center;
+    margin-top: 50px;
+    max-width: 600px; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.icon-warning {
+    font-size: 5rem;
+    margin-bottom: 10px;
+    display: block; 
+}
+
+
+.title-error {
+    color: #d9534f !important; 
+    margin-bottom: 20px;
+}
+
+.text-error {
+    font-size: 1.2rem;
+    color: #333;
+    margin: 20px 0 40px 0; 
+    line-height: 1.6;
+}
+
+.link-home {
+    display: inline-block;
+    margin-top: 30px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    color: #777;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.link-home:hover {
+    color: #0e6021; 
+    border-bottom: 1px solid #0e6021;
 }
