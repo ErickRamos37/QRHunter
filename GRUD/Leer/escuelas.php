@@ -26,7 +26,11 @@
         <h2>Lista de Escuelas Registradas</h2>
         
         <div class="header-acciones" style="justify-content: flex-start; margin-bottom: 20px;">
+<<<<<<< HEAD
             <a href="<?php echo BASE_URL?>Formularios/crearEscuela.php"><button class="buttonNormal"> Agregar Nueva Escuela</button></a>
+=======
+            <a href="<?php echo BASE_URL?>Formularios/crearEscuela.php"><button class="buttonNormal">+ Agregar Nueva Escuela</button></a>
+>>>>>>> 905f7c003abe835186b39c04830c22813eb736f1
         </div>
         
         <table id="tablaEscuelas" class="display"> 

@@ -9,9 +9,14 @@ if (!isset($_GET["id_equipo"]) || !is_numeric($_GET["id_equipo"])) {
     exit();
 }
 
+$id_disp = $_GET["id_disp"];
 $id_equipo = $_GET["id_equipo"];
 
 try {
+    $sql_estado = "UPDATE dispositivos SET idEstado = 1 WHERE id_dispositivo = ?";
+    $sentencia_estado = $conn->prepare($sql_estado);
+    $sentencia_estado->execute([$id_disp]);
+
     $sql_puntos = "delete from puntos where equipo_id = ?";
     $sentencia_puntos = $conn->prepare($sql_puntos);
     $sentencia_puntos->execute([$id_equipo]);
@@ -26,10 +31,8 @@ try {
     if ($conn->inTransaction()) {
         $conn->rollBack();
     }
-    
-    header("Location:".BASE_URL."GRUD/Leer/listaEquipos.php?error=delete_fail");
-    echo "<h1>Error al intentar eliminar el equipo.</h1>";
-    echo "<p>Causa: " . $e->getMessage() . "</p>";
+    $error = urlencode($e->getMessage());
+    header("Location:".BASE_URL."GRUD/Leer/listaEquipos.php?mensaje=".$error);
 }
 exit();
 ?>

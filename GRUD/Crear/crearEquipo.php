@@ -26,8 +26,14 @@
             <input type="text" id="nombreEquipo" name="nombreEquipo" required>
 
             <label for="avatar">Seleccionar Avatar:</label>
-            <select id="avatar" name="avatar">
-                <option disabled selected>--Elige un avatar--</option>
+            <select id="avatar" name="avatar" required>
+                <option value="" disabled selected>--Elige un Avatar--</option>
+                <?php
+                    $sql = $conn->query("SELECT av.id_avatar, av.nombre FROM avatars av ORDER BY nombre;");
+                    while ($avatar = $sql->fetch()) {
+                        echo "<option value='{$avatar['id_avatar']}'>{$avatar['nombre']}</option>";
+                    }
+                ?>
             </select>
 
             <label for="escuela">Seleccionar Escuela:</label>
