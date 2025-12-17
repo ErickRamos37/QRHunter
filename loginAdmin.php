@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuario_ingresado = $_POST['usuario'];
     $password_ingresada = $_POST['password'];
 
-    // Obtener el registro completo (incluyendo el hash de la contraseña)
+    // Obtener el registro completo 
     $sql = "SELECT id, usuario, password FROM administradores WHERE usuario = :usuario";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':usuario', $usuario_ingresado);

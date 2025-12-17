@@ -20,7 +20,7 @@ $conn = conectarBD();
         
         <h2 class="title-green">Registrar Nueva Ciudad</h2>
         
-        <form action="insertar_ciudad.php" method="POST" class="form-qr">
+        <form action="insertar_ciudad.php" method="POST" class="form">
             
             <label for="nombre">Nombre de la Ciudad:</label>
             <input type="text" id="nombre" name="nombre" required placeholder="Ej: Ensenada" class="input-box">

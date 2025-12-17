@@ -38,7 +38,7 @@ if (isset($_GET['id_ciudad'])) {
         
         <h2 class="title-green">Editar Ciudad</h2>
         
-        <form action="editar_ciudad.php" method="POST" class="form-qr">
+        <form action="editar_ciudad.php" method="POST" class="form">
             
             <input type="hidden" name="id_ciudad" value="<?php echo $ciudad['id_ciudad']; ?>">
 

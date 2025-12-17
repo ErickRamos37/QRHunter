@@ -42,7 +42,7 @@ $conn = conectarBD();
         <tbody>
             <?php
             // Obtener todas las ciudades en orden ascendente //
-            $sql = "SELECT * FROM ciudades ORDER BY id_ciudad ASC LIMIT 10"; 
+            $sql = "SELECT * FROM ciudades ORDER BY id_ciudad ASC"; 
             $sentencia = $conn->prepare($sql);
             $sentencia->execute();
             $ciudades = $sentencia->fetchAll(PDO::FETCH_ASSOC);
@@ -93,8 +93,8 @@ $conn = conectarBD();
                 },
                 "sProcessing": "Procesando..."
             },
-            "pageLength": 10, // Mostrar 10 por defecto
-            "ordering": true,  // Permitir ordenar por columnas
+            "pageLength": 10, 
+            "ordering": true,  
         });
     });
 </script>
